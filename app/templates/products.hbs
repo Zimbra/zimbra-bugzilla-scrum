@@ -1,0 +1,12 @@
+<table>
+  <tbody>
+    {{#each product in model}}
+      <tr>
+        <td>{{product.name}}</td>
+        <td>{{product.description}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+{{outlet}}
