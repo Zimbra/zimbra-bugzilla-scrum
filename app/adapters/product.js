@@ -6,9 +6,10 @@ import Ember from 'ember';
 // findAll 
 //
 var findAll = function (store, type) {
+  var self = this;
   var promise = new Ember.RSVP.Promise(function(resolve, reject) {
     Ember.$.ajax({
-      url: 'https://bugzilla.zimbra.com/jsonrpc.cgi?method=Product.get_accessible_products',
+      url: self.get('host') + '/jsonrpc.cgi?method=Product.get_accessible_products',
       dataType: 'jsonp',
       context: store,
       error: function(xhr, ajaxOptions, thrownError) {
@@ -42,6 +43,7 @@ var findAll = function (store, type) {
   });
   return promise;
 };
+
 
 export default ApplicationAdapter.extend({
   findAll: findAll
