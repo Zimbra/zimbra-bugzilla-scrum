@@ -28,6 +28,24 @@ var sprintDefs = [
   {id: 7, end:'2014-12-09', begin:'2014-11-19'}
 ];
 
+
+//
+// find 
+//
+var find = function (store, type, id, snapshot) {
+  return new Ember.RSVP.Promise(function(resolve, reject) {
+    var sprint = _.find(sprintDefs, {id:Number(id)});
+    if (sprint && !sprint.begin) {
+      var prevSprint = _.findWhere(sprintDefs, {id:Number(id)-1});
+      if (prevSprint) {
+        sprint.begin = moment(prevSprint.end).add(1, 'days').format('YYYY-MM-DD');
+      }
+    }
+    resolve({sprint:sprint});
+  });
+};
+
+
 //
 // findAll 
 //
@@ -47,5 +65,6 @@ var findAll = function (store, type) {
 
 
 export default ApplicationAdapter.extend({
+  find: find,
   findAll: findAll
 });

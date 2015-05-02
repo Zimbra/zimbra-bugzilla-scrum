@@ -1,0 +1,32 @@
+<h2>Sprint {{model.name}}</h2>
+
+<table>
+  <thead>
+    <th>ID</th>
+    <th>Pri</th>
+    <th>Comp</th>
+    <th>Assignee</th>
+    <th>Status</th>
+    <th>Resolution</th>
+    <th>Summary</th>
+    <th>Keywords</th>
+  </thead>
+  <tbody>
+    {{#each bug in bugs}}
+      <tr>
+        <td>{{bug.id}}</td>
+        <td>{{bug.priority}}</td>
+        <td>{{bug.component}}</td>
+        <td>{{bug.assigned_to}}</td>
+        <td>{{bug.status}}</td>
+        <td>{{bug.resolution}}</td>
+        <td>{{bug.summary}}</td>
+        <td>
+          {{#each keyword in bug.keywords}}
+            <span>{{keyword}}</span>
+          {{/each}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

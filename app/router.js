@@ -11,4 +11,5 @@ export default Router.map(function() {
   this.route('keywords');
   this.route('sprints');
   this.route('board');
+  this.route('sprint', {path:'/sprint/:sprint_id'});
 });
