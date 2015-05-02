@@ -4,6 +4,14 @@ export default DS.Model.extend({
   begin: DS.attr('date'),
   end: DS.attr('date'),
   
+  prev: function() {
+    return this.store.find('sprint', Number(this.get('id')) - 1);
+  }.property('id'),
+  
+  next: function() {
+    return this.store.find('sprint', Number(this.get('id')) + 1);
+  }.property('id'),
+  
   name: function() {
     return 'S' + this.get('id');
   }.property('id'),

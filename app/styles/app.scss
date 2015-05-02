@@ -1,1 +1,10 @@
 @import "boardView";
+
+.keywords {
+  .keyword:after {
+    content: ', ';
+  }
+  .keyword:last-of-type:after {
+    content: '';
+  }
+}

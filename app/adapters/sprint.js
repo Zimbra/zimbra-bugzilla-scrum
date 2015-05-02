@@ -1,4 +1,5 @@
 import ApplicationAdapter from './application';
+import Ember from 'ember';
 import moment from 'moment';
 
 var sprintDefs = [

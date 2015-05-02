@@ -1,9 +1,13 @@
 {{outlet}}
 
-<div class="footer">
-  {{#link-to "index"}}home{{/link-to}}
-  {{#link-to "board" (query-params sprint=17)}}board{{/link-to}}
-  {{#link-to "bugs"}}bugs{{/link-to}}
-  {{#link-to "products"}}products{{/link-to}}
-  {{#link-to "sprints"}}sprints{{/link-to}}
-</div>
+<nav class="navbar navbar-bottom">
+  <div class="container">
+    <div class="row">
+      {{#link-to "index"}}home{{/link-to}}
+      {{#link-to "board" (query-params sprint=17)}}board{{/link-to}}
+      {{#link-to "bugs"}}bugs{{/link-to}}
+      {{#link-to "products"}}products{{/link-to}}
+      {{#link-to "sprints"}}sprints{{/link-to}}
+    </div>
+  </div>
+</nav>
