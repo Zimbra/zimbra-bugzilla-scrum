@@ -9,4 +9,5 @@ export default Router.map(function() {
   this.route('bugs');
   this.route('products');
   this.route('keywords');
+  this.route('sprints');
 });
