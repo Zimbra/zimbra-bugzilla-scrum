@@ -1,5 +1,7 @@
 {{#each sprint in model}}
-{{sprint.name}}
+  <li>{{sprint.name}} {{moment sprint.begin "MMM D"}}&mdash;{{moment sprint.end "MMM D YYYY"}}
+    {{#if sprint.isCurrent}}(current){{/if}}
+  </li>
 {{/each}}
 
 {{outlet}}
