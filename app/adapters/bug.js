@@ -7,8 +7,23 @@ import Ember from 'ember';
 // findAll 
 //
 var findAll = function (store, type) {
+  return findQuery(store, type, {});
+};
+
+
+//
+// findQuery
+//
+var findQuery = function (store, type, query) {
   var self = this;
-  var url = self.get('host') + '/jsonrpc.cgi?method=Bug.search&params=[{"limit":10,"target_milestone":"Kiss"}]';
+  query = {};
+  query.product='ZCS';
+  query.limit = 2000;
+  query.target_milestone = 'Kiss';
+  //query.keywords = ['S17'];
+  delete query.keyword;
+  var url = this.get('host') + '/jsonrpc.cgi?method=Bug.search&params=[' + JSON.stringify(query) + ']';
+  console.log('** url', url);
   var promise = new Ember.RSVP.Promise(function(resolve, reject) {
     Ember.$.ajax({
       url: url,
@@ -18,7 +33,7 @@ var findAll = function (store, type) {
         reject(thrownError);
       },
       success: function(response) {
-        //console.log('** $.ajax returns', JSON.stringify(response));
+        console.log('** $.ajax returns', JSON.stringify(response));
         if (response.error) {
           reject(response.error);
           return;
@@ -32,5 +47,5 @@ var findAll = function (store, type) {
 
 
 export default ApplicationAdapter.extend({
-  findAll: findAll
+  findQuery: findQuery
 });

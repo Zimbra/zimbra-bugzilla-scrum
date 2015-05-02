@@ -1,0 +1,40 @@
+<div class="col-md-4">
+  <div>To Do</div>
+  <ul class="list-group">
+    {{#each bug in toDoBugs}}
+      <li class="list-group-item">
+        <div>{{gravatar-image email=bug.assigned_to title=bug.assigned_to size=25}}</div>
+        <div class="id">{{bug.id}}</div>
+        <div class="summary">{{bug.summary}}</div> 
+      </li>
+    {{/each}}
+  </ul>
+</div>
+
+<div class="col-md-4">
+  <div>In Progress</div>
+  <ul class="list-group">
+    {{#each bug in inProgressBugs}}
+      <li class="list-group-item">
+        <div>{{gravatar-image email=bug.assigned_to title=bug.assigned_to size=25}}</div>
+        <div class="id">{{bug.id}}</div>
+        <div class="summary">{{bug.summary}}</div> 
+      </li>
+    {{/each}}
+  </ul>
+</div>
+
+<div class="col-md-4">
+  <div>Done</div>
+  <ul class="list-group">
+    {{#each bug in doneBugs}}
+      <li class="list-group-item">
+        <div>{{gravatar-image email=bug.assigned_to title=bug.assigned_to size=25}}</div>
+        <div class="id">{{bug.id}}</div>
+        <div class="summary">{{bug.summary}}</div> 
+      </li>
+    {{/each}}
+  </ul>
+</div>
+
+{{outlet}}

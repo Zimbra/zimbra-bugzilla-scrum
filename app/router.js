@@ -10,4 +10,5 @@ export default Router.map(function() {
   this.route('products');
   this.route('keywords');
   this.route('sprints');
+  this.route('board');
 });
