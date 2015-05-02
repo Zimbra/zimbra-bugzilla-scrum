@@ -26,6 +26,10 @@ export default DS.Model.extend({
   
   isCurrent: function() {
     return this.get('hasStarted') && !this.get('hasEnded');
-  }.property(['hasStarted', 'hasEnded'])
+  }.property(['hasStarted', 'hasEnded']),
+
+  bugs: function() {
+    return this.store.find('bug', {keywords:this.get('name')});
+  }.property('name')
   
 });

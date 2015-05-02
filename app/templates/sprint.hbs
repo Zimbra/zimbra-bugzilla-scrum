@@ -1,44 +1,20 @@
 <ul class="nav nav-pills">
   {{#if model.prev}}
-  <li role="presentation">{{#link-to 'sprint' model.prev}}{{model.prev.name}}{{/link-to}}</li>
+  <li role="presentation">
+    {{#link-to 'sprint' model.prev}}{{model.prev.name}}{{/link-to}}
+  </li>
   {{/if}}
-  <li role="presentation" class="active">{{#link-to 'sprint' model}}Sprint {{model.name}}{{/link-to}}</li>
+  
+  <li role="presentation" class="active">
+    {{#link-to 'sprint' model}}Sprint {{model.name}}{{/link-to}}
+  </li>
+  
   {{#if model.next}}
-  <li role="presentation">{{#link-to 'sprint' model.next}}{{model.next.name}}{{/link-to}}</li>
+  <li role="presentation">
+    {{#link-to 'sprint' model.next}}{{model.next.name}}{{/link-to}}
+  </li>
   {{/if}}
 </ul>
-
-
-<table>
-  <thead>
-    <th>ID</th>
-    <th>Pri</th>
-    <th>Comp</th>
-    <th>Assignee</th>
-    <th>Status</th>
-    <th>Resolution</th>
-    <th>Summary</th>
-    <th>Keywords</th>
-  </thead>
-  <tbody>
-    {{#each bug in bugs}}
-      <tr>
-        <td>{{bug.id}}</td>
-        <td>{{bug.priority}}</td>
-        <td>{{bug.component}}</td>
-        <td>{{bug.assigned_to}}</td>
-        <td>{{bug.status}}</td>
-        <td>{{bug.resolution}}</td>
-        <td>{{bug.summary}}</td>
-        <td class="keywords">
-          {{#each keyword in bug.keywords}}
-            <span class="keyword">{{keyword}}</span>
-          {{/each}}
-        </td>
-      </tr>
-    {{/each}}
-  </tbody>
-</table>
 
 
 {{outlet}}

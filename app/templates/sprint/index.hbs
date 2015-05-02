@@ -1,0 +1,39 @@
+<ul class="nav nav-pills">
+  <li role="presentation" class="active">{{#link-to 'sprint.index'}}Overview{{/link-to}}</li>
+  <li role="presentation">{{#link-to 'sprint.work'}}Work{{/link-to}}</li>
+</ul>
+
+
+<table>
+  <thead>
+    <th>ID</th>
+    <th>Pri</th>
+    <th>Comp</th>
+    <th>Assignee</th>
+    <th>Status</th>
+    <th>Resolution</th>
+    <th>Summary</th>
+    <th>Keywords</th>
+  </thead>
+  <tbody>
+    {{#each bug in model.bugs}}
+      <tr>
+        <td>{{bug.id}}</td>
+        <td>{{bug.priority}}</td>
+        <td>{{bug.component}}</td>
+        <td>{{bug.assigned_to}}</td>
+        <td>{{bug.status}}</td>
+        <td>{{bug.resolution}}</td>
+        <td>{{bug.summary}}</td>
+        <td class="keywords">
+          {{#each keyword in bug.keywords}}
+            <span class="keyword">{{keyword}}</span>
+          {{/each}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+
+{{outlet}}
