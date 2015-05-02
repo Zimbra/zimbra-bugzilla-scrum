@@ -1,0 +1,32 @@
+<ul class="nav nav-pills">
+  <li role="presentation">{{#link-to 'sprint.index'}}Overview{{/link-to}}</li>
+  <li role="presentation" class="active">{{#link-to 'sprint.plan'}}Plan{{/link-to}}</li>
+  <li role="presentation">{{#link-to 'sprint.work'}}Work{{/link-to}}</li>
+</ul>
+
+
+<div class="container">
+  <div>
+    <strong>Sprint {{model.name}}</strong> -
+    <span class="sprintIssueCount">{{model.bugs.length}} issues</span>
+  </div>
+  <div class="sprintDateRange">{{moment model.begin "ll"}} &mdash; {{moment model.end "ll"}}</div>
+  <ul class="list-group">
+    {{#each bug in model.bugs}}
+      <li class="list-group-item">
+        <div class="keywords">
+          {{#each keyword in bug.keywords}}
+            <span class="keyword">{{keyword}}</span>
+          {{/each}}
+        </div>
+        <div class="idAndSummary">
+          <span class="id">{{#if bug.isDone}}<s>{{bug.id}}</s>{{else}}{{bug.id}}{{/if}}</span>
+          <span class="summary">{{bug.summary}}</span>
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+</div>
+
+
+{{outlet}}

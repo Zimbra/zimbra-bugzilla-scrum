@@ -8,5 +8,21 @@ export default DS.Model.extend({
   product: DS.attr('string'),
   resolution: DS.attr('string'),
   status: DS.attr('string'),
-  summary: DS.attr('string')
+  summary: DS.attr('string'),
+  
+  isDone: function() {
+    var status = this.get('status');
+    return status === 'RESOLVED';
+  }.property('status'),
+  
+  isInProgress: function() {
+    var status = this.get('status');
+    return status === 'IN_PROGRESS';
+  }.property('status'),
+  
+  isToDo: function() {
+    var status = this.get('status');
+    return _.contains(['ASSIGNED', 'NEW'], status);
+  }.property('status')
+  
 });

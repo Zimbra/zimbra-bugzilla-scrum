@@ -3,7 +3,7 @@ import {
   test
 } from 'ember-qunit';
 
-moduleFor('route:sprints', {
+moduleFor('route:sprint/plan', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
 });

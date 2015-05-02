@@ -1,0 +1,13 @@
+.sprintPlan {
+  .keywords {
+    float: right;
+  }
+  .idAndSummary {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .sprintDateRange, .sprintIssueCount {
+    color: gray;
+  }
+}
