@@ -12,7 +12,7 @@ export default DS.Model.extend({
   
   isDone: function() {
     var status = this.get('status');
-    return status === 'RESOLVED';
+    return _.contains(['CLOSED', 'RESOLVED', 'VERIFIED'], status);
   }.property('status'),
   
   isInProgress: function() {

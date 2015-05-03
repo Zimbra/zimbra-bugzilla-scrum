@@ -1,3 +1,16 @@
-<h2 id="title">Welcome to Zimbra Scrum</h2>
+<div class="page-header">
+  <h1>Zimbra Scrum
+    <small>Current Sprint: {{#link-to 'sprint' model}}{{model.name}}{{/link-to}}
+    ({{moment model.begin "ll"}} &mdash; {{moment model.end "ll"}})</small>
+  </h1>
+</div>
+
+
+<h3>Recent Sprints:</h3>
+<ul>
+  <li>{{#link-to 'sprint' model.prev}}{{model.prev.name}}{{/link-to}}</li>
+  <li>{{#link-to 'sprint' model.prev.prev}}{{model.prev.prev.name}}{{/link-to}}</li>
+  <li>{{#link-to 'sprint' model.prev.prev.prev}}{{model.prev.prev.prev.name}}{{/link-to}}</li>
+</ul>
 
 {{outlet}}

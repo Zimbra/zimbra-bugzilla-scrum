@@ -5,36 +5,74 @@
 </ul>
 
 
-<table>
-  <thead>
-    <th>ID</th>
-    <th>Pri</th>
-    <th>Comp</th>
-    <th>Assignee</th>
-    <th>Status</th>
-    <th>Resolution</th>
-    <th>Summary</th>
-    <th>Keywords</th>
-  </thead>
-  <tbody>
-    {{#each bug in model.bugs}}
-      <tr>
-        <td>{{bug.id}}</td>
-        <td>{{bug.priority}}</td>
-        <td>{{bug.component}}</td>
-        <td>{{bug.assigned_to}}</td>
-        <td>{{bug.status}}</td>
-        <td>{{bug.resolution}}</td>
-        <td>{{bug.summary}}</td>
-        <td class="keywords">
-          {{#each keyword in bug.keywords}}
-            <span class="keyword">{{keyword}}</span>
-          {{/each}}
-        </td>
-      </tr>
-    {{/each}}
-  </tbody>
-</table>
+<div class="page-header">
+  <h1>Sprint: {{model.name}}
+    <small>({{moment model.begin "ll"}} &mdash; {{moment model.end "ll"}})</small>
+  </h1>
+</div>
 
+
+<div class="panel panel-default">
+  <div class="panel-heading">Completed</div>
+  <div class="panel-body">
+    <table class=".table .table-striped">
+      <thead>
+        <th>ID</th>
+        <th>Summary</th>
+        <th>Priority</th>
+        <th>Status</th>
+        <th>Keywords</th>
+      </thead>
+      <tbody>
+        {{#each bug in doneBugs}}
+          <tr>
+            <td>{{bug.id}}</td>
+            <td>{{bug.summary}}</td>
+            <td>{{bug.priority}}</td>
+            <td>{{bug.status}}</td>
+            <td class="keywords">
+              {{#each keyword in bug.keywords}}
+                <span class="keyword">{{keyword}}</span>
+              {{/each}}
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">Not Completed</div>
+  <div class="panel-body">
+    <table class=".table .table-striped">
+      <thead>
+        <th>ID</th>
+        <th>Summary</th>
+        <th>Priority</th>
+        <th>Status</th>
+        <th>Assigned To</th>
+        <th>Keywords</th>
+      </thead>
+      <tbody>
+        {{#each bug in toDoBugs}}
+          <tr>
+            <td>{{bug.id}}</td>
+            <td>{{bug.summary}}</td>
+            <td>{{bug.priority}}</td>
+            <td>{{bug.status}}</td>
+            <td>{{bug.assigned_to}}</td>
+            <td class="keywords">
+              {{#each keyword in bug.keywords}}
+                <span class="keyword">{{keyword}}</span>
+              {{/each}}
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
 
 {{outlet}}

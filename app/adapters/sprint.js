@@ -1,6 +1,7 @@
 import ApplicationAdapter from './application';
 import Ember from 'ember';
 import moment from 'moment';
+import model from '../models/sprint';
 
 var sprintDefs = [
   {id:30, end:'2015-10-27'},
@@ -65,7 +66,30 @@ var findAll = function (store, type) {
 };
 
 
+//
+// findQuery
+//
+var findQuery = function (store, type, query) {
+  console.log('** findQuery', JSON.stringify(query), _.keys(query));
+  var sprints = findAll(store, type).sprints;
+  var self = this;
+  sprints = _.filter(sprints, function(sprint) {
+    var keys = _.keys(query);
+    for (var i = 0; i < keys.length; i++) {
+      var key = keys[i];
+      var obj = self.store.createRecord('sprint', sprint);
+      if (!Ember.isEqual(query[key], Ember.get(obj, key))) {
+        return false;
+      }
+      return true;
+    } 
+  });
+  return {sprints:sprints};
+};
+
+
 export default ApplicationAdapter.extend({
   find: find,
-  findAll: findAll
+  findAll: findAll,
+  findQuery: findQuery
 });
