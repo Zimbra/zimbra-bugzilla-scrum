@@ -8,9 +8,18 @@
 
 <h3>Recent Sprints:</h3>
 <ul>
-  <li>{{#link-to 'sprint' model.prev}}{{model.prev.name}}{{/link-to}}</li>
-  <li>{{#link-to 'sprint' model.prev.prev}}{{model.prev.prev.name}}{{/link-to}}</li>
-  <li>{{#link-to 'sprint' model.prev.prev.prev}}{{model.prev.prev.prev.name}}{{/link-to}}</li>
+  <li>
+    {{#link-to 'sprint' model.prev}}{{model.prev.name}}{{/link-to}}
+    <small>({{moment model.prev.begin "ll"}} &mdash; {{moment model.prev.end "ll"}})</small>
+  </li>
+  <li>
+    {{#link-to 'sprint' model.prev.prev}}{{model.prev.prev.name}}{{/link-to}}
+    <small>({{moment model.prev.prev.begin "ll"}} &mdash; {{moment model.prev.prev.end "ll"}})</small>
+  </li>
+  <li>
+    {{#link-to 'sprint' model.prev.prev.prev}}{{model.prev.prev.prev.name}}{{/link-to}}
+    <small>({{moment model.prev.prev.prev.begin "ll"}} &mdash; {{moment model.prev.prev.prev.end "ll"}})</small>
+  </li>
 </ul>
 
 {{outlet}}
