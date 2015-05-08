@@ -1,8 +1,6 @@
 <div class="page-header">
-  <h1>Zimbra Scrum
-    <small>Current Sprint: {{#link-to 'sprint' model}}{{model.name}}{{/link-to}}
-    ({{moment model.begin "ll"}} &mdash; {{moment model.end "ll"}})</small>
-  </h1>
+  <h1>Sprint {{#link-to 'sprint' model}}{{model.name}}{{/link-to}}</h1>
+  <h4>({{moment model.begin "ll"}} &mdash; {{moment model.end "ll"}})</h4>
 </div>
 
 

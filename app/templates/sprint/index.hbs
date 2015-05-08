@@ -1,12 +1,5 @@
-<ul class="nav nav-pills">
-  <li role="presentation" class="active">{{#link-to 'sprint.index'}}Overview{{/link-to}}</li>
-  <li role="presentation">{{#link-to 'sprint.plan'}}Plan{{/link-to}}</li>
-  <li role="presentation">{{#link-to 'sprint.work'}}Work{{/link-to}}</li>
-</ul>
-
-
 <div class="page-header">
-  <h1>Sprint: {{model.name}}
+  <h1>Sprint {{model.name}}
     <small>({{moment model.begin "ll"}} &mdash; {{moment model.end "ll"}})</small>
   </h1>
 </div>
