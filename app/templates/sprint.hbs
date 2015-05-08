@@ -4,19 +4,6 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <!-- li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li -->
-        {{#if model.prev}}
-        <li role="presentation">
-          {{#link-to 'sprint' model.prev}}{{model.prev.name}}{{/link-to}}
-        </li>
-        {{/if}}
-        <li role="presentation" class="active">
-          {{#link-to 'sprint' model}}Sprint {{model.name}}{{/link-to}}
-        </li>
-        {{#if model.next}}
-        <li role="presentation">
-          {{#link-to 'sprint' model.next}}{{model.next.name}}{{/link-to}}
-        </li>
-        {{/if}}
       </ul>
       <!-- form class="navbar-form navbar-left" role="search">
         <div class="form-group">
@@ -25,6 +12,22 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form -->
     </div>
+    
+    <ul class="nav nav-pills navbar-left">
+      {{#if model.prev}}
+      <li role="presentation">
+        {{#link-to 'sprint' model.prev}}{{model.prev.name}}{{/link-to}}
+      </li>
+      {{/if}}
+      <li role="presentation" class="active">
+        {{#link-to 'sprint' model}}Sprint {{model.name}}{{/link-to}}
+      </li>
+      {{#if model.next}}
+      <li role="presentation">
+        {{#link-to 'sprint' model.next}}{{model.next.name}}{{/link-to}}
+      </li>
+      {{/if}}
+    </ul>
     
     <ul class="nav nav-pills navbar-right">
       <li role="presentation" {{bind-attr class="controller.isOverview:active"}}>{{#link-to 'sprint.index'}}Overview{{/link-to}}</li>
