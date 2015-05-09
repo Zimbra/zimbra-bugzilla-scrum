@@ -2,6 +2,7 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   assigned_to: DS.attr('string'),
+  cc: DS.attr('string-array'),
   component: DS.attr('string'),
   creation_time: DS.attr('date'),
   creator: DS.attr('string'),
@@ -9,6 +10,7 @@ export default DS.Model.extend({
   last_change_time: DS.attr('date'),
   priority: DS.attr('string'),
   product: DS.attr('string'),
+  qa_contact: DS.attr('string'),
   resolution: DS.attr('string'),
   status: DS.attr('string'),
   summary: DS.attr('string'),

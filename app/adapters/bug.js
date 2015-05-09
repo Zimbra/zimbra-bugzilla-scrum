@@ -2,7 +2,7 @@ import ApplicationAdapter from './application';
 import DS from 'ember-data';
 import Ember from 'ember';
 
-var include_fields = ['assigned_to','component','creation_time','creator','id','keywords','last_change_time','priority','resolution','status','summary'];
+var include_fields = ['assigned_to','cc','component','creation_time','creator','id','keywords','last_change_time','priority','qa_contact','resolution','status','summary'];
 
 //
 // find 
@@ -10,9 +10,8 @@ var include_fields = ['assigned_to','component','creation_time','creator','id','
 var find = function (store, type, id, snapshot) {
   return new Ember.RSVP.Promise(function(resolve, reject) {
     var params = {id:id};
-    //params.include_fields = include_fields;
     var url = 'https://bugzilla.zimbra.com/jsonrpc.cgi?method=Bug.search&params=[' + JSON.stringify(params) + ']';
-    //console.log('** url', url);
+    console.log('GET', url);
     Ember.$.ajax({
       url: url,
       dataType: 'jsonp',
@@ -56,7 +55,7 @@ var findQuery = function (store, type, query) {
   params.target_milestone = 'Kiss';
   params.include_fields = ['id','keywords'];
   var url = 'https://bugzilla.zimbra.com/jsonrpc.cgi?method=Bug.search&params=[' + JSON.stringify(params) + ']';
-  console.log('** url', url);
+  console.log('GET', url);
   var self = this;
   var promise = new Ember.RSVP.Promise(function(resolve, reject) {
     Ember.$.ajax({
@@ -86,7 +85,7 @@ var findQuery = function (store, type, query) {
         params = {id:_.pluck(filtered,'id')};
         params.include_fields = include_fields;
         url = 'https://bugzilla.zimbra.com/jsonrpc.cgi?method=Bug.search&params=[' + JSON.stringify(params) + ']';
-        console.log('** url', url);
+        console.log('GET', url);
         Ember.$.ajax({
           url: url,
           dataType: 'jsonp',

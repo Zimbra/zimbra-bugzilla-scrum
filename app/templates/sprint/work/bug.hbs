@@ -1,22 +1,66 @@
 <div><strong>{{model.id}}</strong> ({{#link-to 'sprint.work'}}close{{/link-to}})</div>
 <div>{{model.summary}}</div>
 
-<ul class="list-group">
-  
-  <div><strong>Details</strong></div>
-  <li class="list-group-item">Status: {{model.status}}</li>
-  <li class="list-group-item">Component: {{model.component}}</li>
-  <li class="list-group-item">Keywords: {{model.keywords}}</li>
 
-  <div><strong>People</strong></div>
-  <li class="list-group-item">Reporter: {{model.creator}}</li>
-  <li class="list-group-item">Assignee: {{model.assigned_to}}</li>
-  
-  <div><strong>Dates</strong></div>
-  <li class="list-group-item">Created: {{moment model.creation_time 'lll'}}</li>
-  <li class="list-group-item">Updated: {{moment model.last_change_time 'lll'}}</li>
-  
-</ul>
+<div><strong>Details</strong></div>
+<div class="row">
+  <div class="col-sm-5">Status:</div>
+  <div class="col-sm-7">{{model.status}}</div>
+</div>
+{{#if model.isDone}}
+  <div class="row">
+    <div class="col-sm-5">Resolution:</div>
+    <div class="col-sm-7">{{model.resolution}}</div>
+  </div>
+{{/if}}
+<div class="row">
+  <div class="col-sm-5">Component:</div>
+  <div class="col-sm-7">{{model.component}}</div>
+</div>  
+<div class="row">
+  <div class="col-sm-5">Keywords:</div>
+  <div class="col-sm-7">
+    <span class="keywords">
+      {{#each keyword in model.keywords}}
+        <span class="keyword">{{keyword}}</span>
+      {{/each}}
+    </span>
+  </div>
+</div>
+
+
+<div><strong>People</strong></div>
+<div class="row">
+  <div class="col-sm-5">Reporter:</div>
+  <div class="col-sm-7">{{model.creator}}</div>
+</div>
+<div class="row">
+  <div class="col-sm-5">Assignee:</div>
+  <div class="col-sm-7">{{model.assigned_to}}</div>
+</div>
+<div class="row">
+  <div class="col-sm-5">QA Contact:</div>
+  <div class="col-sm-7">{{model.qa_contact}}</div>
+</div>
+<div class="row">
+  <div class="col-sm-5">Cc:</div>
+  <div class="col-sm-7">
+    {{#each person in model.cc}}
+      <div>{{person}}</div>
+    {{/each}}
+  </div>
+</div>
+
+
+<div><strong>Dates</strong></div>
+<div class="row">
+  <div class="col-sm-5">Created:</div>
+  <div class="col-sm-7">{{moment model.creation_time 'lll'}}</div>
+</div>
+<div class="row">
+  <div class="col-sm-5">Updated:</div>
+  <div class="col-sm-7">{{moment model.last_change_time 'lll'}}</div>
+</div>
 
 
 {{outlet}}
