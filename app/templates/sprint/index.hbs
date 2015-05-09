@@ -14,6 +14,7 @@
         <th>Summary</th>
         <th>Priority</th>
         <th>Status</th>
+        <th>Resolution</th>
         <th>Keywords</th>
       </thead>
       <tbody>
@@ -23,6 +24,7 @@
             <td>{{bug.summary}}</td>
             <td>{{bug.priority}}</td>
             <td>{{bug.status}}</td>
+            <td>{{bug.resolution}}</td>
             <td class="keywords">
               {{#each keyword in bug.keywords}}
                 <span class="keyword">{{keyword}}</span>
