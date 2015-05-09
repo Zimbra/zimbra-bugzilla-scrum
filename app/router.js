@@ -9,7 +9,9 @@ export default Router.map(function() {
   this.route('products');
   this.route('keywords');
   this.route('sprint', {path:'/sprint/:sprint_id'}, function() {
-    this.route('work');
+    this.route('work', function() {
+      this.route('bug', {path:'/:bug_id'});
+    });
     this.route('plan');
   });
 });

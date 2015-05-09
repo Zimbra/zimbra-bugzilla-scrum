@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  needs: ['application'],
 
   inProgressBugs: function() {
     var bugs = this.get('model.bugs');
@@ -21,6 +22,10 @@ export default Ember.Controller.extend({
     if (bugs) {
       return bugs.filterBy('isToDo', true);
     }
-  }.property('model.bugs.length')
+  }.property('model.bugs.length'),
+  
+  showBugSidebar: function() {
+    return this.get('controllers.application.currentPath') === 'sprint.work.bug';
+  }.property('controllers.application.currentPath')
   
 });

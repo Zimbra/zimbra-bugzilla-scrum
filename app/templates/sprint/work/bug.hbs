@@ -1,0 +1,22 @@
+<div><strong>{{model.id}}</strong> ({{#link-to 'sprint.work'}}close{{/link-to}})</div>
+<div>{{model.summary}}</div>
+
+<ul class="list-group">
+  
+  <div><strong>Details</strong></div>
+  <li class="list-group-item">Status: {{model.status}}</li>
+  <li class="list-group-item">Component: {{model.component}}</li>
+  <li class="list-group-item">Keywords: {{model.keywords}}</li>
+
+  <div><strong>People</strong></div>
+  <li class="list-group-item">Reporter: {{model.creator}}</li>
+  <li class="list-group-item">Assignee: {{model.assigned_to}}</li>
+  
+  <div><strong>Dates</strong></div>
+  <li class="list-group-item">Created: {{moment model.creation_time 'lll'}}</li>
+  <li class="list-group-item">Updated: {{moment model.last_change_time 'lll'}}</li>
+  
+</ul>
+
+
+{{outlet}}

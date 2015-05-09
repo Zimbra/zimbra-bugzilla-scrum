@@ -1,41 +1,46 @@
-<div class="col-md-4">
-  <div>To Do</div>
-  <ul class="list-group">
-    {{#each bug in toDoBugs}}
-      <li class="list-group-item">
-        <div>{{gravatar-image email=bug.assigned_to title=bug.assigned_to size=25}}</div>
-        <div class="id">{{bug.id}}</div>
-        <div class="summary">{{bug.summary}}</div> 
-      </li>
-    {{/each}}
-  </ul>
+<div {{bind-attr class=":col-sm-12 showBugSidebar:col-lg-9:col-lg-12"}}>
+  <div class="col-md-4">
+    <div>To Do</div>
+    <ul class="list-group">
+      {{#each bug in toDoBugs}}
+        <li class="list-group-item">
+          <div>{{gravatar-image email=bug.assigned_to title=bug.assigned_to size=25}}</div>
+          <div class="id">{{#link-to "sprint.work.bug" bug}}{{bug.id}}{{/link-to}}</div>
+          <div class="summary">{{bug.summary}}</div> 
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+  
+  <div class="col-md-4">
+    <div>In Progress</div>
+    <ul class="list-group">
+      {{#each bug in inProgressBugs}}
+        <li class="list-group-item">
+          <div>{{gravatar-image email=bug.assigned_to title=bug.assigned_to size=25}}</div>
+          <div class="id">{{#link-to "sprint.work.bug" bug}}{{bug.id}}{{/link-to}}</div>
+          <div class="summary">{{bug.summary}}</div> 
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+  
+  <div class="col-md-4">
+    <div>Done</div>
+    <ul class="list-group">
+      {{#each bug in doneBugs}}
+        <li class="list-group-item">
+          <div>{{gravatar-image email=bug.assigned_to title=bug.assigned_to size=25}}</div>
+          <div class="id">{{#link-to "sprint.work.bug" bug}}{{bug.id}}{{/link-to}}</div>
+          <div class="summary">{{bug.summary}}</div> 
+        </li>
+      {{/each}}
+    </ul>
+  </div>
 </div>
 
-<div class="col-md-4">
-  <div>In Progress</div>
-  <ul class="list-group">
-    {{#each bug in inProgressBugs}}
-      <li class="list-group-item">
-        <div>{{gravatar-image email=bug.assigned_to title=bug.assigned_to size=25}}</div>
-        <div class="id">{{bug.id}}</div>
-        <div class="summary">{{bug.summary}}</div> 
-      </li>
-    {{/each}}
-  </ul>
-</div>
-
-<div class="col-md-4">
-  <div>Done</div>
-  <ul class="list-group">
-    {{#each bug in doneBugs}}
-      <li class="list-group-item">
-        <div>{{gravatar-image email=bug.assigned_to title=bug.assigned_to size=25}}</div>
-        <div class="id">{{bug.id}}</div>
-        <div class="summary">{{bug.summary}}</div> 
-      </li>
-    {{/each}}
-  </ul>
-</div>
-
-
-{{outlet}}
+{{#if showBugSidebar}}
+  <div class="col-sm-12 col-lg-3">
+    {{outlet}}
+  </div>
+{{/if}}
