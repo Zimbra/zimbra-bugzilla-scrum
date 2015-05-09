@@ -99,7 +99,33 @@ var findQuery = function (store, type, query) {
               reject(response.error);
               return;
             }
-            resolve({bugs:response.result.bugs});
+            var bugs = response.result.bugs;
+            
+            // 3rd-pass query fetches comment ids
+            params = {ids:_.pluck(filtered,'id'), include_fields:['id']};
+            url = 'https://bugzilla.zimbra.com/jsonrpc.cgi?method=Bug.comments&params=[' + JSON.stringify(params) + ']';
+            console.log('GET', url);
+            Ember.$.ajax({
+              url: url,
+              dataType: 'jsonp',
+              context: store,
+              error: function(xhr, ajaxOptions, thrownError) {
+                reject(thrownError);
+              },
+              success: function(response) {
+                //console.log('** $.ajax returns', JSON.stringify(response));
+                if (response.error) {
+                  reject(response.error);
+                  return;
+                }
+                _.map(bugs, function(bug) {
+                  var x = response.result.bugs[bug.id].comments;
+                  var bugIds = x.getEach('id');
+                  bug.comments = bugIds;
+                });
+                resolve({bugs:bugs});
+              }
+            });
           }
         });
       }

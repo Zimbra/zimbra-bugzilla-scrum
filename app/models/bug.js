@@ -15,6 +15,8 @@ export default DS.Model.extend({
   status: DS.attr('string'),
   summary: DS.attr('string'),
   
+  comments: DS.hasMany('comment', {async:true}),
+  
   isDone: function() {
     var status = this.get('status');
     return _.contains(['CLOSED', 'RESOLVED', 'VERIFIED'], status);
