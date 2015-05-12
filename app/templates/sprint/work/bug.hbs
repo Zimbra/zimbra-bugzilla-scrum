@@ -1,4 +1,8 @@
-<div><strong>{{model.id}}</strong> ({{#link-to 'sprint.work'}}close{{/link-to}})</div>
+<div>
+  <strong>{{model.id}}</strong>
+  <a target="_blank" {{bind-attr href="model.externalUrl"}}><span class="glyphicon glyphicon-export"/></a>
+  ({{#link-to 'sprint.work'}}close{{/link-to}})
+</div>
 <div>{{model.summary}}</div>
 
 

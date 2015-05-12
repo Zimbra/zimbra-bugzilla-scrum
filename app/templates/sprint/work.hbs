@@ -5,7 +5,10 @@
       {{#each bug in toDoBugs}}
         <li class="list-group-item">
           <div>{{gravatar-image email=bug.assigned_to title=bug.assigned_to size=25}}</div>
-          <div class="id">{{#link-to "sprint.work.bug" bug}}{{bug.id}}{{/link-to}}</div>
+          <div class="id">
+            {{#link-to "sprint.work.bug" bug}}{{bug.id}}{{/link-to}}
+            <a target="_blank" {{bind-attr href="bug.externalUrl"}}><span class="glyphicon glyphicon-export"/></a>
+          </div>
           <div class="summary">{{bug.summary}}</div> 
         </li>
       {{/each}}
@@ -18,7 +21,10 @@
       {{#each bug in inProgressBugs}}
         <li class="list-group-item">
           <div>{{gravatar-image email=bug.assigned_to title=bug.assigned_to size=25}}</div>
-          <div class="id">{{#link-to "sprint.work.bug" bug}}{{bug.id}}{{/link-to}}</div>
+          <div class="id">
+            {{#link-to "sprint.work.bug" bug}}{{bug.id}}{{/link-to}}
+            <a target="_blank" {{bind-attr href="bug.externalUrl"}}><span class="glyphicon glyphicon-export"/></a>
+          </div>
           <div class="summary">{{bug.summary}}</div> 
         </li>
       {{/each}}
@@ -31,7 +37,10 @@
       {{#each bug in doneBugs}}
         <li class="list-group-item">
           <div>{{gravatar-image email=bug.assigned_to title=bug.assigned_to size=25}}</div>
-          <div class="id">{{#link-to "sprint.work.bug" bug}}{{bug.id}}{{/link-to}}</div>
+          <div class="id">
+            {{#link-to "sprint.work.bug" bug}}{{bug.id}}{{/link-to}}
+            <a target="_blank" {{bind-attr href="bug.externalUrl"}}><span class="glyphicon glyphicon-export"/></a>
+          </div>
           <div class="summary">{{bug.summary}}</div> 
         </li>
       {{/each}}

@@ -13,7 +13,10 @@
           {{/each}}
         </div>
         <div class="idAndSummary">
-          <span class="id">{{#if bug.isDone}}<s>{{bug.id}}</s>{{else}}{{bug.id}}{{/if}}</span>
+          <span class="id">
+            {{#if bug.isDone}}<s>{{bug.id}}</s>{{else}}{{bug.id}}{{/if}}
+            <a target="_blank" {{bind-attr href="bug.externalUrl"}}><span class="glyphicon glyphicon-export"/></a>
+          </span>
           <span class="summary">{{bug.summary}}</span>
         </div>
       </li>

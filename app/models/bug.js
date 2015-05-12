@@ -17,6 +17,13 @@ export default DS.Model.extend({
   
   comments: DS.hasMany('comment', {async:true}),
   
+  externalUrl: function() {
+    var id = this.get('id');
+    if (id) {
+      return 'http://bugzilla.zimbra.com/show_bug.cgi?id=' + id;
+    }
+  }.property('id'),
+  
   isDone: function() {
     var status = this.get('status');
     return _.contains(['CLOSED', 'RESOLVED', 'VERIFIED'], status);
