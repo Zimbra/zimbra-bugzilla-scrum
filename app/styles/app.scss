@@ -1,7 +1,13 @@
+@import "colors";
 @import "sprint";
 @import "sprintPlan";
 @import "sprintWork";
 @import "sprintWorkBug";
+
+.gravatar-image {
+  float: right;
+  border-radius: 3px;
+}
 
 .keywords {
   .keyword:after {

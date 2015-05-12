@@ -65,13 +65,10 @@
 
 <div><strong>Comments</strong></div>
 {{#each comment in model.comments}}
-  <div class="comment">
-    <div class="row">
-      <div class="col-sm-6">{{comment.creator}}</div>
-      <div class="col-sm-6">{{moment comment.creation_time 'll'}}</div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12"><div class="commentText">{{comment.text}}</div></div>
+  <div class="panel panel-default">
+    <div class="panel-heading">{{comment.creator}} {{moment comment.creation_time 'll'}}</div>
+    <div class="panel-body">
+      <div class="commentText">{{comment.text}}</div>
     </div>
   </div>
 {{/each}}
