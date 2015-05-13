@@ -39,8 +39,10 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
+  // Settings particular to GitHub Pages based hosting
   if (environment === 'production') {
     ENV.baseURL = 'zimbra-bugzilla-scrum';
+    ENV.locationType = 'hash';
   }
 
   return ENV;
