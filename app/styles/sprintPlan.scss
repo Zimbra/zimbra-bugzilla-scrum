@@ -1,4 +1,11 @@
 .sprintPlan {
+  table {
+    tr {
+      td {
+        padding: 0 5px;
+      }
+    }
+  }
   .keywords {
     float: right;
   }
@@ -6,6 +13,9 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+  .storyPts {
+    text-align: right;
   }
   .sprintDateRange, .sprintIssueCount {
     color: gray;

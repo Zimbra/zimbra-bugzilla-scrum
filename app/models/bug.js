@@ -3,6 +3,11 @@ import DS from 'ember-data';
 export default DS.Model.extend({
   assigned_to: DS.attr('string'),
   cc: DS.attr('string-array'),
+  cf_storypoints_developer: DS.attr('number'),
+  cf_storypoints_docs: DS.attr('number'),
+  cf_storypoints_pm: DS.attr('number'),
+  cf_storypoints_qa: DS.attr('number'),
+  cf_storypoints_ux: DS.attr('number'),
   component: DS.attr('string'),
   creation_time: DS.attr('date'),
   creator: DS.attr('string'),
@@ -37,6 +42,18 @@ export default DS.Model.extend({
   isToDo: function() {
     var status = this.get('status');
     return _.contains(['ASSIGNED', 'NEW'], status);
-  }.property('status')
+  }.property('status'),
+  
+  storyPointsTotal: function() {
+    var total = 0;
+    var self = this;
+    _(['cf_storypoints_developer','cf_storypoints_docs','cf_storypoints_pm','cf_storypoints_qa','cf_storypoints_ux']).forEachRight(function(field) {
+      var value = self.get(field);
+      if (value) {
+        total += Number(value);
+      }
+    });
+    return total;
+  }.property(['cf_storypoints_developer','cf_storypoints_docs','cf_storypoints_pm','cf_storypoints_qa','cf_storypoints_ux'])
   
 });

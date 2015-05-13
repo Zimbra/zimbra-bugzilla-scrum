@@ -2,7 +2,26 @@ import ApplicationAdapter from './application';
 import DS from 'ember-data';
 import Ember from 'ember';
 
-var include_fields = ['assigned_to','cc','component','creation_time','creator','id','keywords','last_change_time','priority','qa_contact','resolution','status','summary'];
+var include_fields = [
+  'assigned_to',
+  'cc',
+  'cf_storypoints_developer',
+  'cf_storypoints_docs',
+  'cf_storypoints_pm',
+  'cf_storypoints_qa',
+  'cf_storypoints_ux',
+  'component',
+  'creation_time',
+  'creator',
+  'id',
+  'keywords',
+  'last_change_time',
+  'priority',
+  'qa_contact',
+  'resolution',
+  'status',
+  'summary'
+];
 
 //
 // find 

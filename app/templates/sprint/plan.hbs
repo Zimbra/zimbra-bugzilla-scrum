@@ -4,24 +4,36 @@
     <span class="sprintIssueCount">{{model.bugs.length}} issues</span>
   </div>
   <div class="sprintDateRange">{{moment model.begin "ll"}} &mdash; {{moment model.end "ll"}}</div>
-  <ul class="list-group">
-    {{#each bug in model.bugs}}
-      <li class="list-group-item">
-        <div class="keywords">
-          {{#each keyword in bug.keywords}}
-            <span class="keyword">{{keyword}}</span>
-          {{/each}}
-        </div>
-        <div class="idAndSummary">
-          <span class="id">
-            {{#if bug.isDone}}<s>{{bug.id}}</s>{{else}}{{bug.id}}{{/if}}
-            <a target="_blank" {{bind-attr href="bug.externalUrl"}}><span class="glyphicon glyphicon-export"/></a>
-          </span>
-          <span class="summary">{{bug.summary}}</span>
-        </div>
-      </li>
-    {{/each}}
-  </ul>
+  <table>
+    <thead>
+      <th>ID</th>
+      <th>Summary & Keywords</th>
+      <th class="storyPts">Pts</th>
+    </thead>
+    <tbody>
+      {{#each bug in model.bugs}}
+        <tr>
+          <td>
+            {{#if bug.isDone}}<s>{{bug.id}}</s>{{else}}{{bug.id}}{{/if}}          
+              <a target="_blank" {{bind-attr href="bug.externalUrl"}}><span class="glyphicon glyphicon-export"/></a>
+          </td>
+          <td class="summaryAndKeywords">
+            <div class="keywords">
+              {{#each keyword in bug.keywords}}
+                <span class="keyword">{{keyword}}</span>
+              {{/each}}
+            </div>
+            <div class="summary">{{bug.summary}}</div>
+          </td>
+          <td class="storyPts">{{bug.storyPointsTotal}}</td>
+        </tr>
+      {{/each}}
+      <tr>
+        <td colspan="2">&nbsp;</td>
+        <td class="storyPts">{{controller.storyPointsTotalSum}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 
