@@ -1,8 +1,8 @@
 {
   "name": "zimbra-bugzilla-scrum",
-  "version": "0.0.0",
-  "description": "Scrum views for Zimbra's Bugzilla system.",
-  "private": true,
+  "version": "1.0.0",
+  "description": "Scrum automation for Zimbra's Bugzilla system.",
+  "private": false,
   "directories": {
     "doc": "doc",
     "test": "tests"

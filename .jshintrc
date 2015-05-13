@@ -4,7 +4,8 @@
     "window",
     "-Promise",
     "_",
-    "moment"
+    "moment",
+    "ZimbraBugzillaScrum"
   ],
   "browser": true,
   "boss": true,
