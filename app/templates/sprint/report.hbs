@@ -1,14 +1,14 @@
 <div class="container">
   <div>
     <strong>Burndown Progress</strong> &mdash; Sprint {{model.name}}
-    {{model.storyPointsDone}} / {{model.storyPointsTotal}}
-    
     <div class="progress">
-      <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" {{bind-attr aria-valuenow=model.bugsStoryPointsDone}} aria-valuemin="0" {{bind-attr aria-valuemax=model.storyPointsDone}} {{bind-attr style=view.progressBarStyle}}>
+      <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuemin="0"
+        {{bind-attr aria-valuenow=model.bugsStoryPointsDone}}
+        {{bind-attr aria-valuemax=model.storyPointsDone}}
+        {{bind-attr style=view.progressBarStyle}}>
         {{model.storyPointsDone}} / {{model.storyPointsTotal}} ({{model.storyPointsDonePercent}}% Complete)
       </div>
     </div>    
-    
   </div>
   
   <div>
