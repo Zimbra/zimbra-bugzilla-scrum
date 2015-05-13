@@ -30,6 +30,17 @@ export default DS.Model.extend({
 
   bugs: function() {
     return this.store.find('bug', {keywords:this.get('name')});
-  }.property('name')
+  }.property('name'),
+  
+  bugsStoryPointsTotal: function() {
+    var bugs = this.get('bugs');
+    if (bugs) {
+      var total = 0;
+      bugs.forEach(function(bug) {
+        total += bug.get('storyPointsTotal');
+      });
+      return total;
+    }
+  }.property('bugs.@each.storyPointsTotal')
   
 });
