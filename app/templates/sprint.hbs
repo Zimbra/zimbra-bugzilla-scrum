@@ -16,15 +16,15 @@
     <ul class="nav nav-pills navbar-left">
       {{#if model.prev}}
       <li role="presentation">
-        {{#link-to 'sprint' model.prev}}{{model.prev.name}}{{/link-to}}
+        {{#link-to currentPath model.prev}}{{model.prev.name}}{{/link-to}}
       </li>
       {{/if}}
       <li role="presentation" class="active">
-        {{#link-to 'sprint' model}}Sprint {{model.name}}{{/link-to}}
+        {{#link-to currentPath model}}Sprint {{model.name}}{{/link-to}}
       </li>
       {{#if model.next}}
       <li role="presentation">
-        {{#link-to 'sprint' model.next}}{{model.next.name}}{{/link-to}}
+        {{#link-to currentPath model.next}}{{model.next.name}}{{/link-to}}
       </li>
       {{/if}}
     </ul>

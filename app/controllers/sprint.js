@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   needs: ['application'],
+  currentPath: Ember.computed.oneWay('controllers.application.currentPath'),
   
   isOverview: function() {
     return this.get('controllers.application.currentPath') === 'sprint.index';
