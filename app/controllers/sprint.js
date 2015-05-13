@@ -12,7 +12,8 @@ export default Ember.Controller.extend({
   }.property('controllers.application.currentPath'),
   
   isWork: function() {
-    return this.get('controllers.application.currentPath') === 'sprint.work';
+    var s = this.get('controllers.application.currentPath');
+    return (typeof s !== 'undefined' && s.indexOf('sprint.work') === 0);
   }.property('controllers.application.currentPath')
   
 });
