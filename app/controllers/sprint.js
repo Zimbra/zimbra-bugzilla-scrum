@@ -12,6 +12,10 @@ export default Ember.Controller.extend({
     return this.get('controllers.application.currentPath') === 'sprint.plan';
   }.property('controllers.application.currentPath'),
   
+  isReport: function() {
+    return this.get('controllers.application.currentPath') === 'sprint.report';
+  }.property('controllers.application.currentPath'),
+  
   isWork: function() {
     var s = this.get('controllers.application.currentPath');
     return (typeof s !== 'undefined' && s.indexOf('sprint.work') === 0);

@@ -13,5 +13,6 @@ export default Router.map(function() {
       this.route('bug', {path:'/:bug_id'});
     });
     this.route('plan');
+    this.route('report');
   });
 });

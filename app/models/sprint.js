@@ -32,7 +32,30 @@ export default DS.Model.extend({
     return this.store.find('bug', {keywords:this.get('name')});
   }.property('name'),
   
-  bugsStoryPointsTotal: function() {
+  storyPointsDone: function() {
+    var bugs = this.get('bugs');
+    if (!bugs) {
+      return;
+    }
+    var total = 0;
+    bugs.forEach(function(bug) {
+      if (bug.get('isDone')) {
+        total += bug.get('storyPointsTotal');
+      }
+    });
+    return total;
+  }.property('bugs.@each.storyPointsTotal'),
+  
+  storyPointsDonePercent: function() {
+    var done = this.get('storyPointsDone');
+    var total = this.get('storyPointsTotal');
+    console.log(done, total);
+    if (total > 0) {
+      return Math.round(100 * done / total);
+    }
+  }.property('storyPointsDone'),
+  
+  storyPointsTotal: function() {
     var bugs = this.get('bugs');
     if (bugs) {
       var total = 0;
