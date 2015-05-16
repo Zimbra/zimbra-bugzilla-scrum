@@ -21,6 +21,7 @@ export default DS.Model.extend({
   summary: DS.attr('string'),
   
   comments: DS.hasMany('comment', {async:true}),
+  history: DS.hasMany('history', {async:true}),
   
   externalUrl: function() {
     var id = this.get('id');

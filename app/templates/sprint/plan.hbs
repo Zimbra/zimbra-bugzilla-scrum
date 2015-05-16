@@ -14,7 +14,7 @@
       {{#each bug in model.bugs}}
         <tr>
           <td>
-            {{#if bug.isDone}}<s>{{bug.id}}</s>{{else}}{{bug.id}}{{/if}}          
+            {{#link-to "bug" bug}}{{#if bug.isDone}}<s>{{bug.id}}</s>{{else}}{{bug.id}}{{/if}}{{/link-to}}          
               <a target="_blank" {{bind-attr href="bug.externalUrl"}}><span class="glyphicon glyphicon-export"/></a>
           </td>
           <td class="summaryAndKeywords">

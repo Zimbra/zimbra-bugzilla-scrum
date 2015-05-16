@@ -31,7 +31,7 @@
       <tbody>
         {{#each bug in doneBugs}}
           <tr>
-            <td>{{bug.id}}</td>
+            <td>{{#link-to "bug" bug}}{{bug.id}}{{/link-to}}</td>
             <td>{{bug.summary}}</td>
             <td>{{bug.priority}}</td>
             <td>{{bug.status}}</td>

@@ -1,0 +1,23 @@
+<table class="table">
+  <thead>
+    <th>Who</th>
+    <th>When</th>
+    <th>Field</th>
+    <th>Removed</th>
+    <th>Added</th>
+  </thead>
+  <tbody>
+    {{#each change in model.history}}
+      <tr>
+        <td>{{change.who}}</td>
+        <td>{{moment change.when 'll'}}</td>
+        <td>{{change.field_name}}</td>
+        <td>{{change.removed}}</td>
+        <td>{{change.added}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+
+{{outlet}}

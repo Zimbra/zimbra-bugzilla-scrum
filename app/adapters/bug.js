@@ -17,6 +17,7 @@ var include_fields = [
   'keywords',
   'last_change_time',
   'priority',
+  'product',
   'qa_contact',
   'resolution',
   'status',
@@ -42,10 +43,11 @@ var find = function (store, type, id, snapshot) {
         //console.log('** $.ajax returns', JSON.stringify(response));
         if (response.error) {
           reject(response.error);
-          return;
+        } else {
+          var bug = response.result.bugs[0];
+          bug.history = [bug.id];
+          resolve({bug:bug});
         }
-        var bug = response.result.bugs[0];
-        resolve({bug:bug});
       }
     });
   });
@@ -65,18 +67,52 @@ var findAll = function (store, type) {
 //
 var findQuery = function (store, type, query) {
   console.log('** findQuery', JSON.stringify(query));
+  return new Ember.RSVP.Promise(function(resolve, reject) {
   
-  // 1st-pass query fetches ids & keywords only, to apply the sprint filter based on keywords
-  var params = _.clone(query);
-  delete params.keyword;
-  delete params.keywords;
-  //params.limit = 100000;
-  params.target_milestone = 'Kiss';
-  params.include_fields = ['id','keywords'];
-  var url = 'https://bugzilla.zimbra.com/jsonrpc.cgi?method=Bug.search&params=[' + JSON.stringify(params) + ']';
-  console.log('GET', url);
-  var self = this;
-  var promise = new Ember.RSVP.Promise(function(resolve, reject) {
+    // 1st-pass query fetches ids & keywords only, to apply the sprint filter based on keywords
+    loadBugIds(store, query).then(function(bugIds) {
+      console.log('** bugIds ' + bugIds);
+      console.log(bugIds);
+      
+      // 2nd-pass query fetches the rest of the fields
+      loadBugDetails(store, bugIds).then(function(bugs) {
+      
+        // 3rd-pass query fetches comment ids
+        loadCommentIds(store, bugIds).then(function(commentsByBug) {
+          _.map(bugs, function(bug) {
+            bug.comments = commentsByBug[bug.id].comments.getEach('id');
+            bug.history = [bug.id];
+          });
+          
+          resolve({bugs:bugs});
+          
+        }).catch(function(err) {
+          reject(err);
+        });
+        
+      }).catch(function(err) {
+        reject(err);
+      });
+      
+    }).catch(function(err) {
+      reject(err);
+    });
+        
+  });
+};
+
+
+var loadBugIds = function(store, query) {
+  return new Ember.RSVP.Promise(function(resolve, reject) {
+    var params = _.clone(query);
+    delete params.keyword;
+    delete params.keywords;
+    //params.limit = 100000;
+    params.target_milestone = 'Kiss';
+    params.include_fields = ['id','keywords'];
+    var url = 'https://bugzilla.zimbra.com/jsonrpc.cgi?method=Bug.search&params=[' + JSON.stringify(params) + ']';
+    console.log('GET', url);
+    var self = this;
     Ember.$.ajax({
       url: url,
       dataType: 'jsonp',
@@ -88,69 +124,72 @@ var findQuery = function (store, type, query) {
         //console.log('** $.ajax returns', JSON.stringify(response));
         if (response.error) {
           reject(response.error);
-          return;
-        }
-        console.log('** $.ajax returns ' + response.result.bugs.length + ' bugs');
-        var filtered = _.filter(response.result.bugs, function(bug) {
-          if (query.keywords) {
-            return _.contains(bug.keywords, query.keywords);
-          } else {
-            return true;
-          }
-        });
-        console.log('** filtered $.ajax returns ' + filtered.length + ' bugs');
-        
-        // 2nd-pass query fetches the rest of the fields
-        params = {id:_.pluck(filtered,'id')};
-        params.include_fields = include_fields;
-        url = 'https://bugzilla.zimbra.com/jsonrpc.cgi?method=Bug.search&params=[' + JSON.stringify(params) + ']';
-        console.log('GET', url);
-        Ember.$.ajax({
-          url: url,
-          dataType: 'jsonp',
-          context: store,
-          error: function(xhr, ajaxOptions, thrownError) {
-            reject(thrownError);
-          },
-          success: function(response) {
-            //console.log('** $.ajax returns', JSON.stringify(response));
-            if (response.error) {
-              reject(response.error);
-              return;
+        } else {
+          console.log('Bug.search returns ' + response.result.bugs.length + ' bugs');
+          var filtered = _.filter(response.result.bugs, function(bug) {
+            if (query.keywords) {
+              return _.contains(bug.keywords, query.keywords);
+            } else {
+              return true;
             }
-            var bugs = response.result.bugs;
-            
-            // 3rd-pass query fetches comment ids
-            params = {ids:_.pluck(filtered,'id'), include_fields:['id']};
-            url = 'https://bugzilla.zimbra.com/jsonrpc.cgi?method=Bug.comments&params=[' + JSON.stringify(params) + ']';
-            console.log('GET', url);
-            Ember.$.ajax({
-              url: url,
-              dataType: 'jsonp',
-              context: store,
-              error: function(xhr, ajaxOptions, thrownError) {
-                reject(thrownError);
-              },
-              success: function(response) {
-                //console.log('** $.ajax returns', JSON.stringify(response));
-                if (response.error) {
-                  reject(response.error);
-                  return;
-                }
-                _.map(bugs, function(bug) {
-                  var x = response.result.bugs[bug.id].comments;
-                  var bugIds = x.getEach('id');
-                  bug.comments = bugIds;
-                });
-                resolve({bugs:bugs});
-              }
-            });
-          }
-        });
+          });
+          var ids = _.pluck(filtered,'id');
+          console.log('Bug.search filtered by keywords returns ' + filtered.length + ' bugs');
+          resolve(ids);
+        }
       }
     });
   });
-  return promise;
+};
+
+
+var loadCommentIds = function(store, ids) {
+  return new Ember.RSVP.Promise(function(resolve, reject) {
+    var params = {ids:ids, include_fields:['id']};
+    var url = 'https://bugzilla.zimbra.com/jsonrpc.cgi?method=Bug.comments&params=[' + JSON.stringify(params) + ']';
+    console.log('GET', url);
+    Ember.$.ajax({
+      url: url,
+      dataType: 'jsonp',
+      context: store,
+      error: function(xhr, ajaxOptions, thrownError) {
+        reject(thrownError);
+      },
+      success: function(response) {
+        console.log('** $.ajax returns', JSON.stringify(response));
+        if (response.error) {
+          reject(response.error);
+        } else {
+          resolve(response.result.bugs);
+        }
+      }
+    });
+  });
+};
+
+
+var loadBugDetails = function(store, ids) {
+  return new Ember.RSVP.Promise(function(resolve, reject) {
+    var params = {id:ids, include_fields: include_fields};
+    var url = 'https://bugzilla.zimbra.com/jsonrpc.cgi?method=Bug.search&params=[' + JSON.stringify(params) + ']';
+    console.log('GET', url);
+    Ember.$.ajax({
+      url: url,
+      dataType: 'jsonp',
+      context: store,
+      error: function(xhr, ajaxOptions, thrownError) {
+        reject(thrownError);
+      },
+      success: function(response) {
+        //console.log('** $.ajax returns', JSON.stringify(response));
+        if (response.error) {
+          reject(response.error);
+        } else {
+          resolve(response.result.bugs);
+        }
+      }
+    });
+  });
 };
 
 

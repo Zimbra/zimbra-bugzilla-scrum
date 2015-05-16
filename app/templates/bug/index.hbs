@@ -1,0 +1,112 @@
+<div class="row">
+  <div class="col-sm-12 col-lg-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Details</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-5">Bug#:</div>
+          <div class="col-sm-7">
+            {{model.id}}
+            <a target="_blank" {{bind-attr href="model.externalUrl"}}><span class="glyphicon glyphicon-export"/></a>
+          </div>
+        </div>  
+        <div class="row">
+          <div class="col-sm-5">Product:</div>
+          <div class="col-sm-7">{{model.product}}</div>
+        </div>  
+        <div class="row">
+          <div class="col-sm-5">Component:</div>
+          <div class="col-sm-7">{{model.component}}</div>
+        </div>  
+        <div class="row">
+          <div class="col-sm-5">Status:</div>
+          <div class="col-sm-7">{{model.status}}</div>
+        </div>
+        {{#if model.isDone}}
+          <div class="row">
+            <div class="col-sm-5">Resolution:</div>
+            <div class="col-sm-7">{{model.resolution}}</div>
+          </div>
+        {{/if}}
+        <hr/>
+        <div class="row">
+          <div class="col-sm-5">Keywords:</div>
+          <div class="col-sm-7">
+            <span class="keywords">
+              {{#each keyword in model.keywords}}
+                <span class="keyword">{{keyword}}</span>
+              {{/each}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-sm-12 col-lg-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">People</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-5">Reporter:</div>
+          <div class="col-sm-7">{{model.creator}}<br/>{{moment model.creation_time 'lll'}}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-5">Modified:</div>
+          <div class="col-sm-7">
+            {{moment model.last_change_time 'lll'}}
+            ({{#link-to 'bug.history' model}}History{{/link-to}})
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-5">Assignee:</div>
+          <div class="col-sm-7">{{model.assigned_to}}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-5">QA Contact:</div>
+          <div class="col-sm-7">{{model.qa_contact}}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-5">Cc:</div>
+          <div class="col-sm-7">
+            {{#each person in model.cc}}
+              <div>{{person}}</div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Dependencies, Duplicates, and Blockers</h3>
+      </div>
+      <div class="panel-body">
+      </div>
+    </div>
+  
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Case Numbers</h3>
+      </div>
+      <div class="panel-body">
+      </div>
+    </div>
+    
+  </div>
+</div>
+  
+
+<div><strong>Comments</strong></div>
+{{#each comment in model.comments}}
+  <div class="panel panel-default">
+    <div class="panel-heading">{{comment.creator}} {{moment comment.creation_time 'll'}}</div>
+    <div class="panel-body">
+      <pre class="commentText">{{comment.text}}</pre>
+    </div>
+  </div>
+{{/each}}

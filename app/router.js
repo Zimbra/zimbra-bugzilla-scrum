@@ -15,4 +15,7 @@ export default Router.map(function() {
     this.route('plan');
     this.route('report');
   });
+  this.route('bug', {path:'/bug/:bug_id'}, function() {
+    this.route('history');
+  });
 });
