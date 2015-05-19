@@ -31,7 +31,7 @@ var findQuery = function (store, type, query) {
   console.log('** findQuery', JSON.stringify(query), _.keys(query));
   var self = this;
   var sprints = _.filter(sprintData, function(sprint) {
-    var sprint_ = _.clone(sprint);
+    var sprint_ = _.cloneDeep(sprint);
     delete sprint_.id;
     var keys = _.keys(query);
     for (var i = 0; i < keys.length; i++) {
