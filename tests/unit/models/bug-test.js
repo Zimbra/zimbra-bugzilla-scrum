@@ -5,7 +5,7 @@ import {
 
 moduleForModel('bug', {
   // Specify the other units that are required for this test.
-  needs: []
+  needs: ['model:comment', 'model:history']
 });
 
 test('it exists', function(assert) {

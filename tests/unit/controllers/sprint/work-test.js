@@ -5,7 +5,7 @@ import {
 
 moduleFor('controller:sprint/work', {
   // Specify the other units that are required for this test.
-  // needs: ['controller:foo']
+  needs: ['controller:application']
 });
 
 // Replace this with your real tests.
