@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import AuthenticatorBase from 'simple-auth/authenticators/base';
 
 export default AuthenticatorBase.extend({

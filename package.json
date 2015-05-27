@@ -34,7 +34,6 @@
     "ember-cli-qunit": "0.3.10",
     "ember-cli-sass": "4.0.0-beta.7",
     "ember-cli-simple-auth": "0.8.0-beta.2",
-    "ember-cli-simple-auth-cookie-store": "0.8.0-beta.2",
     "ember-cli-uglify": "1.0.1",
     "ember-data": "1.0.0-beta.16.1",
     "ember-export-application-global": "^1.0.2",
