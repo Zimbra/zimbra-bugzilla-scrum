@@ -23,6 +23,15 @@ export default DS.Model.extend({
   comments: DS.hasMany('comment', {async:true}),
   history: DS.hasMany('history', {async:true}),
   
+  docsRequired: function() {
+    var keywords = this.get('keywords');
+    if (keywords.contains('NO_DOCS')) {
+      return 'NO_DOCS';
+    } else if (keywords.contains('DOC_REQ')) {
+      return 'DOC_REQ';
+    }
+  }.property('keywords.@each'),
+  
   externalUrl: function() {
     var id = this.get('id');
     if (id) {

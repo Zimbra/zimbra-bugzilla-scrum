@@ -10,7 +10,8 @@ export default Router.map(function() {
   this.route('keywords');
   this.route('sprint', {path:'/sprint/:sprint_id'}, function() {
     this.route('work', function() {
-      this.route('bug', {path:'/:bug_id'});
+      this.route('bug'    , {path:'/bug/:bug_id'});
+      this.route('resolve', {path:'/resolve/:bug_id'});
     });
     this.route('plan');
     this.route('report');

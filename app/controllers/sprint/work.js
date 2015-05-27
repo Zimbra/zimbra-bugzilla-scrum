@@ -24,8 +24,17 @@ export default Ember.Controller.extend({
     }
   }.property('model.bugs.length'),
   
-  showBugSidebar: function() {
-    return this.get('controllers.application.currentPath') === 'sprint.work.bug';
-  }.property('controllers.application.currentPath')
+  showSidebar: function() {
+    var currentPath = this.get('controllers.application.currentPath');
+    if (currentPath) {
+      return currentPath.indexOf('sprint.work.') > -1 && currentPath.indexOf('sprint.work.index') == -1;
+    }
+  }.property('controllers.application.currentPath'),
+  
+  actions: {
+    resolve: function(bugId) {
+      this.transitionToRoute('sprint.work.resolve', bugId);
+    }
+  }
   
 });
