@@ -64,6 +64,21 @@ export default DS.Model.extend({
       }
     });
     return total;
-  }.property(['cf_storypoints_developer','cf_storypoints_docs','cf_storypoints_pm','cf_storypoints_qa','cf_storypoints_ux'])
+  }.property(['cf_storypoints_developer','cf_storypoints_docs','cf_storypoints_pm','cf_storypoints_qa','cf_storypoints_ux']),
+  
+  setKeyword: function(name) {
+    var keywords = this.get('keywords');
+    if (keywords.indexOf(name) == -1) {
+      keywords.push(name);
+    } 
+  },
+  
+  unsetKeyword: function(name) {
+    var keywords = this.get('keywords');
+    var at = keywords.indexOf(name);
+    if (at > -1) {
+      keywords.splice(at, 1);
+    } 
+  }
   
 });

@@ -21,7 +21,7 @@
   <div class="col-sm-5">{{#if model.resolution}}{{model.resolution}}{{else}}---{{/if}}</div>
   <div class="col-sm-2">==></div>
   <div class="col-sm-5">
-    {{view "select" content=view.resolutions}}
+    {{view "select" content=view.resolutions selection=controller.resolution}}
   </div>
 </div>
 
@@ -30,12 +30,12 @@
   <div class="col-sm-5">{{#if model.docsRequired}}{{model.docsRequired}}{{else}}---{{/if}}</div>
   <div class="col-sm-2">==></div>
   <div class="col-sm-5">
-    {{view "select" content=view.docRequirements}}
+    {{view "select" content=view.docRequirements selection=controller.docsRequired}}
   </div>
 </div>
 
 
 <div class="row">
-  <button class="btn btn-default btn-success" {{action save}}>Resolve</button>
-  <button class="btn btn-default" {{action cancel}}>Cancel</button>
+  <button class="btn btn-default btn-success" {{action 'save'}}>Resolve</button>
+  <button class="btn btn-default" {{action 'cancel'}}>Cancel</button>
 </div>

@@ -102,6 +102,39 @@ var findQuery = function (store, type, query) {
 };
 
 
+//
+// updateRecord
+//
+var updateRecord = function (store, type, snapshot) {
+  console.log('** updateRecord', JSON.stringify(snapshot));
+  console.log('** updateRecord snapshot.record._inFlightAttributes', JSON.stringify(snapshot.record['_inFlightAttributes']));
+  return new Ember.RSVP.Promise(function(resolve, reject) {
+    var params = _.clone(snapshot.record['_inFlightAttributes']);
+    params.ids =[snapshot.id];
+    var url = 'https://bugzilla.zimbra.com/jsonrpc.cgi?method=Bug.update&params=[' + JSON.stringify(params) + ']';
+    console.log('GET', url);
+    var self = this;
+    Ember.$.ajax({
+      url: url,
+      dataType: 'jsonp',
+      context: store,
+      error: function(xhr, ajaxOptions, thrownError) {
+        reject(thrownError);
+      },
+      success: function(response) {
+        console.log('** $.ajax returns', JSON.stringify(response));
+        if (response.error) {
+          reject(response.error);
+        } else {
+          console.log('Bug.update returns ' + JSON.stringify(response.result.bugs));
+          resolve();
+        }
+      }
+    });
+  });
+}
+
+
 var loadBugIds = function(store, query) {
   return new Ember.RSVP.Promise(function(resolve, reject) {
     var params = _.clone(query);
@@ -196,5 +229,6 @@ var loadBugDetails = function(store, ids) {
 export default ApplicationAdapter.extend({
   find: find,
   findAll: findAll,
-  findQuery: findQuery
+  findQuery: findQuery,
+  updateRecord: updateRecord
 });
