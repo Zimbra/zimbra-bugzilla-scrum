@@ -24,7 +24,16 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form -->
       <ul class="nav navbar-nav navbar-right">
-        <!-- li><a href="#">Link</a></li -->
+        {{#if session.isAuthenticated}}
+        <li><a href="#" {{action "invalidateSession"}}><span>{{session.secure.real_name}}</span></a></li>
+        {{else}}
+        <li>{{#link-to 'login'}}Login{{/link-to}}</li>
+        {{/if}}
+        <li>
+          <a href="https://github.com/Zimbra/zimbra-bugzilla-scrum">
+            {{fa-icon "github-square" size="2" title="Fork me on GitHub"}}
+          </a>
+        </li>
         <!-- li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">

@@ -18,4 +18,5 @@ export default Router.map(function() {
   this.route('bug', {path:'/bug/:bug_id'}, function() {
     this.route('history');
   });
+  this.route('login');
 });
