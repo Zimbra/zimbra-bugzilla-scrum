@@ -132,7 +132,7 @@ var updateRecord = function (store, type, snapshot) {
       }
     });
   });
-}
+};
 
 
 var loadBugIds = function(store, query) {
