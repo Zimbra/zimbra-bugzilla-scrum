@@ -42,11 +42,12 @@ Make use of the many generators for code, try `ember help generate` for more det
 ### Deploying
 
 * `ember github-pages:commit`
+* `git push origin github-pages`
 
 or
 
 * `ember github-pages:commit --environment=production`
-
+* `git push origin github-pages`
 
 ## Further Reading / Useful Links
 
