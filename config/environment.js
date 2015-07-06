@@ -4,8 +4,8 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'zimbra-bugzilla-scrum',
     environment: environment,
-    baseURL: '/',
-    locationType: 'auto',
+    baseURL: '/zimbra-bugzilla-scrum',
+    locationType: 'hash',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build

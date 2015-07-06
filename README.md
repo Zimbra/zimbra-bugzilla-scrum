@@ -41,7 +41,12 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-* `./publishToGithubPages.sh`
+* `ember github-pages:commit`
+
+or
+
+* `ember github-pages:commit --environment=production`
+
 
 ## Further Reading / Useful Links
 
