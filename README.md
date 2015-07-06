@@ -41,8 +41,11 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-* `ember github-pages:commit --environment=production`
-* `git push origin github-pages`
+```
+$ ember github-pages:commit --environment=production
+$ git push origin gh-pages
+$ git checkout master
+```
 
 ## Further Reading / Useful Links
 
