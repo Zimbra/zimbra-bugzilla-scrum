@@ -34,8 +34,9 @@ var fillInBeginDates = function () {
   var prevSprint;
   var sprintData = _(sprintDefs).forEachRight(function(sprint) {
     if (!sprint.begin && prevSprint) {
-      sprint.begin = moment(prevSprint.end).add(1, 'days').format('YYYY-MM-DD');
+      sprint.begin = moment(prevSprint.end).add(1, 'days').format();
     }
+    sprint.end = moment(sprint.end).format();
     prevSprint = sprint;
     return sprint;
   }).value();
