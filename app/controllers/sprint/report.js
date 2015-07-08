@@ -55,6 +55,7 @@ export default Ember.Controller.extend({
           var sprintBegin = moment(sprint.get('begin'));
           var sprintEnd = moment(sprint.get('end'));
           var daysTotal = 0;
+          var storyPointsTotal = sprint.get('storyPointsTotal');
           for (var day = sprintBegin.clone(); !day.isAfter(sprintEnd); day = day.add(1, 'days'), daysTotal++) {
             var endOfDay = day.clone().add(1, 'days');
             data.labels.push(day.format('MMM D'));
@@ -92,7 +93,6 @@ export default Ember.Controller.extend({
             if (typeof storyPointsCompletedByDay === 'undefined') {
               storyPointsCompletedByDay = 0;
             }
-            var storyPointsTotal = sprint.get('storyPointsTotal');
             var storyPointsRemaining = storyPointsTotal - storyPointsCompletedByDay;
             self.set('high', storyPointsTotal);
             //console.log('** story points total=', storyPointsTotal, 'completed=', storyPointsCompletedByDay);
