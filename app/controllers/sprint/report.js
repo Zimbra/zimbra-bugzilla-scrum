@@ -23,7 +23,7 @@ export default Ember.Controller.extend({
     var self = this;
     var data = {
       labels: [],
-      series: [[]]
+      series: [[],[]]
     };
     
     var sprint = this.get('model');
@@ -54,7 +54,8 @@ export default Ember.Controller.extend({
         } else {
           var sprintBegin = moment(sprint.get('begin'));
           var sprintEnd = moment(sprint.get('end'));
-          for (var day = sprintBegin.clone(); !day.isAfter(sprintEnd); day = day.add(1, 'days')) {
+          var daysTotal = 0;
+          for (var day = sprintBegin.clone(); !day.isAfter(sprintEnd); day = day.add(1, 'days'), daysTotal++) {
             var endOfDay = day.clone().add(1, 'days');
             data.labels.push(day.format('MMM D'));
             
@@ -94,8 +95,13 @@ export default Ember.Controller.extend({
             var storyPointsTotal = sprint.get('storyPointsTotal');
             var storyPointsRemaining = storyPointsTotal - storyPointsCompletedByDay;
             self.set('high', storyPointsTotal);
-            //console.log('** story points total=', storyPointsTotal, 'completed=', storyPointsCompletedByDay); 
-            data.series[0].push(storyPointsRemaining);
+            //console.log('** story points total=', storyPointsTotal, 'completed=', storyPointsCompletedByDay);
+            data.series[1].push(storyPointsRemaining);
+          }
+          
+          for (var dayNumber = 0; dayNumber < daysTotal; dayNumber++) {
+            var plannedPointsCompletedByDay = storyPointsTotal * dayNumber / daysTotal;
+            data.series[0].push(storyPointsTotal - plannedPointsCompletedByDay);
           }
           
           //console.log('** burndownChartData=', JSON.stringify(data)); 

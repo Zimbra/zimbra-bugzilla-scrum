@@ -1,7 +1,11 @@
 .sprintReport {
   
   .ct-series.ct-series-a .ct-line, .ct-series.ct-series-a .ct-point {
-    stroke: blue;
+    stroke: gray;
+  }
+  
+  .ct-series.ct-series-b .ct-line, .ct-series.ct-series-b .ct-point {
+    stroke: green;
   }
   
 }
