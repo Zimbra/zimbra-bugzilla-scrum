@@ -122,7 +122,7 @@ var updateRecord = function (store, type, snapshot) {
         reject(thrownError);
       },
       success: function(response) {
-        console.log('** $.ajax returns', JSON.stringify(response));
+        //console.log('** $.ajax returns', JSON.stringify(response));
         if (response.error) {
           reject(response.error);
         } else {
@@ -189,7 +189,7 @@ var loadCommentIds = function(store, ids) {
         reject(thrownError);
       },
       success: function(response) {
-        console.log('** $.ajax returns', JSON.stringify(response));
+        //console.log('** $.ajax returns', JSON.stringify(response));
         if (response.error) {
           reject(response.error);
         } else {

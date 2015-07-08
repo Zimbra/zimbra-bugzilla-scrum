@@ -12,8 +12,12 @@
   </div>
   
   <div>
-    <strong>Burndown Chart</strong> &mdash; Sprint {{model.name}}
-    <div>(To do)</div>
+    <div>
+      <strong>Burndown Chart</strong> &mdash; Sprint {{model.name}}
+    </div>
+    <div>
+      {{chartist-chart type='line' data=controller.burndownChartData options=controller.burndownChartOptions}}
+    </div>
   </div>
 </div>
 
