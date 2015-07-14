@@ -1,23 +1,67 @@
-<div class="page-header">
-  <h1>Sprint {{#link-to 'sprint' model}}{{model.name}}{{/link-to}}</h1>
-  <h4>({{moment model.begin "ll"}} &mdash; {{moment model.end "ll"}})</h4>
+<div class="col-md-6 col-sm-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title">Current Sprint</div>
+    </div>
+    <div class="panel-body">
+      <ul>
+        <li>
+          {{#link-to 'sprint' model}}Sprint {{model.name}}{{/link-to}}
+          <small>({{moment model.begin "ll"}} &mdash; {{moment model.end "ll"}})</small>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 
 
-<h3>Recent Sprints:</h3>
-<ul>
-  <li>
-    {{#link-to 'sprint' model.prev}}{{model.prev.name}}{{/link-to}}
-    <small>({{moment model.prev.begin "ll"}} &mdash; {{moment model.prev.end "ll"}})</small>
-  </li>
-  <li>
-    {{#link-to 'sprint' model.prev.prev}}{{model.prev.prev.name}}{{/link-to}}
-    <small>({{moment model.prev.prev.begin "ll"}} &mdash; {{moment model.prev.prev.end "ll"}})</small>
-  </li>
-  <li>
-    {{#link-to 'sprint' model.prev.prev.prev}}{{model.prev.prev.prev.name}}{{/link-to}}
-    <small>({{moment model.prev.prev.prev.begin "ll"}} &mdash; {{moment model.prev.prev.prev.end "ll"}})</small>
-  </li>
-</ul>
+<div class="col-md-6 col-sm-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title">Recent Sprints</div>
+    </div>
+    <div class="panel-body">
+      <ul>
+        <li>
+          {{#link-to 'sprint' model.prev}}Sprint {{model.prev.name}}{{/link-to}}
+          <small>({{moment model.prev.begin "ll"}} &mdash; {{moment model.prev.end "ll"}})</small>
+        </li>
+        <li>
+          {{#link-to 'sprint' model.prev.prev}}Sprint {{model.prev.prev.name}}{{/link-to}}
+          <small>({{moment model.prev.prev.begin "ll"}} &mdash; {{moment model.prev.prev.end "ll"}})</small>
+        </li>
+        <li>
+          {{#link-to 'sprint' model.prev.prev.prev}}Sprint {{model.prev.prev.prev.name}}{{/link-to}}
+          <small>({{moment model.prev.prev.prev.begin "ll"}} &mdash; {{moment model.prev.prev.prev.end "ll"}})</small>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-md-6 col-sm-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title">Epics in progress</div>
+    </div>
+    <div class="panel-body">
+      {{#if epicsInProgress}}
+      <ul>
+        {{#each bug in epicsInProgress}}
+          <li>
+            {{#link-to "bug" bug}}{{bug.id}}{{/link-to}}
+            <a target="_blank" {{bind-attr href="bug.externalUrl"}}><span class="glyphicon glyphicon-export"/></a>
+            {{bug.summary}}
+          </li>
+        {{/each}}
+      </ul>
+      {{else}}
+      (None)
+      {{/if}}
+    </div>
+  </div>
+</div>
+
 
 {{outlet}}
