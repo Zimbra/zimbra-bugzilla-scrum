@@ -22,6 +22,7 @@ export default DS.Model.extend({
   
   comments: DS.hasMany('comment', {async:true}),
   history: DS.hasMany('history', {async:true}),
+  blocks: DS.hasMany('bug', {async:true, inverse:null}),
   
   docsRequired: function() {
     var keywords = this.get('keywords');
@@ -54,6 +55,11 @@ export default DS.Model.extend({
     return _.contains(['ASSIGNED', 'NEW'], status);
   }.property('status'),
   
+  isEpic: function() {
+    var keywords = this.get('keywords');
+    return keywords.contains('Epic');
+  }.property('keywords.@each'),
+  
   storyPointsTotal: function() {
     var total = 0;
     var self = this;
@@ -64,7 +70,40 @@ export default DS.Model.extend({
       }
     });
     return total;
-  }.property(['cf_storypoints_developer','cf_storypoints_docs','cf_storypoints_pm','cf_storypoints_qa','cf_storypoints_ux']),
+  }.property('cf_storypoints_developer','cf_storypoints_docs','cf_storypoints_pm','cf_storypoints_qa','cf_storypoints_ux'),
+  
+  blockedStoryPointsDone: function() {
+    var bugs = this.get('blocks');
+    if (!bugs) {
+      return;
+    }
+    var total = 0;
+    bugs.forEach(function(bug) {
+      if (bug.get('isDone')) {
+        total += bug.get('storyPointsTotal');
+      }
+    });
+    return total;
+  }.property('blocks.@each.storyPointsTotal', 'blocks.@each.isDone'),
+  
+  blockedStoryPointsDonePercent: function() {
+    var done = this.get('blockedStoryPointsDone');
+    var total = this.get('blockedStoryPointsTotal');
+    if (total > 0) {
+      return Math.round(100 * done / total);
+    }
+  }.property('blockedStoryPointsDone', 'blockedStoryPointsTotal'),
+  
+  blockedStoryPointsTotal: function() {
+    var bugs = this.get('blocks');
+    if (bugs) {
+      var total = 0;
+      bugs.forEach(function(bug) {
+        total += bug.get('storyPointsTotal');
+      })
+      return total;
+    }
+  }.property('blocks.@each.storyPointsTotal'),
   
   setKeyword: function(name) {
     var keywords = this.get('keywords');

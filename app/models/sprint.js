@@ -26,7 +26,7 @@ export default DS.Model.extend({
   
   isCurrent: function() {
     return this.get('hasStarted') && !this.get('hasEnded');
-  }.property(['hasStarted', 'hasEnded']),
+  }.property('hasStarted', 'hasEnded'),
 
   bugs: function() {
     return this.store.find('bug', {keywords:this.get('name')});
@@ -49,11 +49,10 @@ export default DS.Model.extend({
   storyPointsDonePercent: function() {
     var done = this.get('storyPointsDone');
     var total = this.get('storyPointsTotal');
-    console.log(done, total);
     if (total > 0) {
       return Math.round(100 * done / total);
     }
-  }.property('storyPointsDone'),
+  }.property('storyPointsDone', 'storyPointsTotal'),
   
   storyPointsTotal: function() {
     var bugs = this.get('bugs');

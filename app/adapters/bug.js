@@ -4,6 +4,7 @@ import Ember from 'ember';
 
 var include_fields = [
   'assigned_to',
+  'blocks',
   'cc',
   'cf_storypoints_developer',
   'cf_storypoints_docs',
