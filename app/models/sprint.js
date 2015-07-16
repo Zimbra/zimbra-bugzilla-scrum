@@ -29,7 +29,7 @@ export default DS.Model.extend({
   }.property('hasStarted', 'hasEnded'),
 
   bugs: function() {
-    return this.store.find('bug', {keywords:this.get('name')});
+    return this.store.find('bug', {keywords:this.get('name'), target_milestone:'JudasPriest'});
   }.property('name'),
   
   storyPointsDone: function() {

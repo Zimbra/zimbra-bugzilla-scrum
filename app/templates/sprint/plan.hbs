@@ -36,5 +36,31 @@
   </table>
 </div>
 
+<hr/>
+
+<div class="container">
+  <div>
+    <strong>Backlog</strong> -
+    <span class="sprintIssueCount">{{backlog.length}} issues</span>
+  </div>
+  <div class="sprintDateRange">
+    Keywords: {{backlogKeywords}}
+  </div>
+  <table>
+    <thead>
+      <th>ID</th>
+      <th>Summary & Keywords</th>
+      <th class="storyPts">Pts</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="3">
+          <div class="alert alert-warning" role="alert">TO DO</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 
 {{outlet}}

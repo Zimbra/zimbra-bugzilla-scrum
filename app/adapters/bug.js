@@ -142,7 +142,6 @@ var loadBugIds = function(store, query) {
     delete params.keyword;
     delete params.keywords;
     //params.limit = 100000;
-    params.target_milestone = 'JudasPriest';
     params.include_fields = ['id','keywords'];
     var url = 'https://bugzilla.zimbra.com/jsonrpc.cgi?method=Bug.search&params=[' + JSON.stringify(params) + ']';
     console.log('GET', url);
