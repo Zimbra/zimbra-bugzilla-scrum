@@ -54,11 +54,12 @@
             <a target="_blank" {{bind-attr href="bug.externalUrl"}}><span class="glyphicon glyphicon-export"/></a>
             {{bug.summary}}
             <div class="progress">
-              <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuemin="0"
-                {{bind-attr aria-valuenow=bug.blockedStoryPointsDone}}
-                {{bind-attr aria-valuemax=bug.blockedStoryPointsTotal}}
-                {{bind-attr style=view.progressBarStyle}}>
-                {{bug.blockedStoryPointsDone}} / {{bug.blockedStoryPointsTotal}} ({{bug.blockedStoryPointsDonePercent}}% Complete)
+              <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+                aria-valuemin="0"
+                aria-valuenow="{{bug.dependsOnStoryPointsDone}}"
+                aria-valuemax="{{bug.dependsOnStoryPointsTotal}}"
+                style="width:{{bug.dependsOnStoryPointsDonePercent}}%">
+                {{bug.dependsOnStoryPointsDone}} / {{bug.dependsOnStoryPointsTotal}} ({{bug.dependsOnStoryPointsDonePercent}}% Complete)
               </div>
             </div>    
           </li>

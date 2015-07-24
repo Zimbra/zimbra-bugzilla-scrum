@@ -14,6 +14,7 @@ var include_fields = [
   'component',
   'creation_time',
   'creator',
+  'depends_on',
   'id',
   'keywords',
   'last_change_time',
