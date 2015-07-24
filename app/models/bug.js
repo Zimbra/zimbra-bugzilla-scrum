@@ -100,7 +100,7 @@ export default DS.Model.extend({
       var total = 0;
       bugs.forEach(function(bug) {
         total += bug.get('storyPointsTotal');
-      })
+      });
       return total;
     }
   }.property('blocks.@each.storyPointsTotal'),

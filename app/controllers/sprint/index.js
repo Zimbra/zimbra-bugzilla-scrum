@@ -14,11 +14,27 @@ export default Ember.Controller.extend({
     return sort.indexOf(Ember.get(a, 'status')) - sort.indexOf(Ember.get(b, 'status')); 
   }),
   
-  toDoBugs: function() {
+  toDoBugs_: function() {
     var bugs = this.get('model.bugs');
     if (bugs) {
-      return bugs.filterBy('isToDo', true);
+      return bugs.filterBy('isDone', false);
     }
-  }.property('model.bugs.length')
+  }.property('model.bugs.length'),
+  
+  toDoBugs: Ember.computed.sort('toDoBugs_', function(a, b) {
+    // Primary sort by priority
+    var aPriority = Ember.get(a, 'priority');
+    var bPriority = Ember.get(b, 'priority');
+    if (aPriority && bPriority) {
+      var x = aPriority.localeCompare(bPriority);
+      if (x !== 0) {
+        return x;
+      }
+    }
+    
+    // Secondary sort by progression of status
+    var sort = ['IN_PROGRESS', 'REOPENED', 'ASSIGNED', 'NEW'];
+    return sort.indexOf(Ember.get(a, 'status')) - sort.indexOf(Ember.get(b, 'status')); 
+  })
   
 });
