@@ -99,7 +99,7 @@ export default Ember.Controller.extend({
           }
           
           for (var dayNumber = 0; dayNumber < daysTotal; dayNumber++) {
-            var plannedPointsCompletedByDay = storyPointsTotal * (dayNumber+1) / daysTotal;
+            var plannedPointsCompletedByDay = storyPointsTotal * dayNumber / (daysTotal-1);
             data.series[0].push(storyPointsTotal - plannedPointsCompletedByDay);
           }
           
