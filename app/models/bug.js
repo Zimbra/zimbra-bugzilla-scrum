@@ -53,7 +53,7 @@ export default DS.Model.extend({
   
   isToDo: function() {
     var status = this.get('status');
-    return _.contains(['ASSIGNED', 'NEW'], status);
+    return _.contains(['ASSIGNED', 'NEW', 'REOPENED'], status);
   }.property('status'),
   
   isEpic: function() {
