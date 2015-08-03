@@ -57,7 +57,6 @@ export default Ember.Controller.extend({
           var daysTotal = 0;
           var storyPointsTotal = sprint.get('storyPointsTotal');
           for (var day = sprintBegin.clone(); !day.isAfter(sprintEnd); day = day.add(1, 'days'), daysTotal++) {
-            var endOfDay = day.clone().add(1, 'days');
             data.labels.push(day.format('MMM D'));
             
             var storyPointsByBugId = {};
@@ -65,7 +64,7 @@ export default Ember.Controller.extend({
               var bugId = historyByBug.id;
               
               _(historyByBug.history).forEachRight(function(history) {
-                if (!moment(history.when).isBetween(sprintBegin, endOfDay)) {
+                if (!moment(history.when).isBetween(sprintBegin, day)) {
                   return;
                 }
                 var change = _.find(history.changes, function(change) {
