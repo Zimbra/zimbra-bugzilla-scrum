@@ -47,8 +47,14 @@ var find = function (store, type, id, snapshot) {
           reject(response.error);
         } else {
           var bug = response.result.bugs[0];
-          bug.history = [bug.id];
-          resolve({bug:bug});
+          var bugIds = [bug.id];
+          bug.history = bugIds;
+          
+          // 2nd-pass query fetches comment ids
+          loadCommentIds(store, bugIds).then(function(commentsByBug) {
+            bug.comments = commentsByBug[bug.id].comments.getEach('id');
+            resolve({bug:bug});
+          });
         }
       }
     });
