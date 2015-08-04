@@ -7,6 +7,7 @@
       <ul>
         <li>
           {{#link-to 'sprint' model}}Sprint {{model.name}}{{/link-to}}
+          <a target="_blank" href="https://bugzilla.zimbra.com/buglist.cgi?keywords={{model.name}}"><span class="glyphicon glyphicon-export"/></a>
           <small>({{moment model.begin "ll"}} &mdash; {{moment model.end "ll"}})</small>
         </li>
       </ul>
@@ -24,14 +25,17 @@
       <ul>
         <li>
           {{#link-to 'sprint' model.prev}}Sprint {{model.prev.name}}{{/link-to}}
+          <a target="_blank" href="https://bugzilla.zimbra.com/buglist.cgi?keywords={{model.prev.name}}"><span class="glyphicon glyphicon-export"/></a>
           <small>({{moment model.prev.begin "ll"}} &mdash; {{moment model.prev.end "ll"}})</small>
         </li>
         <li>
           {{#link-to 'sprint' model.prev.prev}}Sprint {{model.prev.prev.name}}{{/link-to}}
+          <a target="_blank" href="https://bugzilla.zimbra.com/buglist.cgi?keywords={{model.prev.prev.name}}"><span class="glyphicon glyphicon-export"/></a>
           <small>({{moment model.prev.prev.begin "ll"}} &mdash; {{moment model.prev.prev.end "ll"}})</small>
         </li>
         <li>
           {{#link-to 'sprint' model.prev.prev.prev}}Sprint {{model.prev.prev.prev.name}}{{/link-to}}
+          <a target="_blank" href="https://bugzilla.zimbra.com/buglist.cgi?keywords={{model.prev.prev.prev.name}}"><span class="glyphicon glyphicon-export"/></a>
           <small>({{moment model.prev.prev.prev.begin "ll"}} &mdash; {{moment model.prev.prev.prev.end "ll"}})</small>
         </li>
       </ul>
