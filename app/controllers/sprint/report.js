@@ -59,12 +59,13 @@ export default Ember.Controller.extend({
           for (var day = sprintBegin.clone(); !day.isAfter(sprintEnd); day = day.add(1, 'days'), daysTotal++) {
             data.labels.push(day.format('MMM D'));
             
+            var nextDay = day.clone().add(1, 'days');
             var storyPointsByBugId = {};
             _(response.result.bugs).forEachRight(function(historyByBug) {
               var bugId = historyByBug.id;
               
               _(historyByBug.history).forEachRight(function(history) {
-                if (!moment(history.when).isBetween(sprintBegin, day)) {
+                if (!moment(history.when).isBetween(sprintBegin, nextDay)) {
                   return;
                 }
                 var change = _.find(history.changes, function(change) {
