@@ -60,28 +60,30 @@ export default Ember.Controller.extend({
             data.labels.push(day.format('MMM D'));
             
             var nextDay = day.clone().add(1, 'days');
-            var storyPointsByBugId = {};
-            _(response.result.bugs).forEachRight(function(historyByBug) {
-              var bugId = historyByBug.id;
-              
-              _(historyByBug.history).forEachRight(function(history) {
-                if (!moment(history.when).isBetween(sprintBegin, nextDay)) {
-                  return;
-                }
-                var change = _.find(history.changes, function(change) {
-                  return change.field_name === 'status' && change.added === 'RESOLVED';
-                });
-                if (!change) {
-                  return;
-                }
+            var firstDayAndXAtOrigin = daysTotal === 0;
+            if (!firstDayAndXAtOrigin) {
+              var storyPointsByBugId = {};
+              _(response.result.bugs).forEachRight(function(historyByBug) {
+                var bugId = historyByBug.id;
                 
-                var bug = bugs.find(function(bug) {
-                  return Ember.get(bug, 'id') == bugId;
+                _(historyByBug.history).forEachRight(function(history) {
+                  if (!moment(history.when).isBetween(sprintBegin, nextDay)) {
+                    return;
+                  }
+                  var change = _.find(history.changes, function(change) {
+                    return change.field_name === 'status' && change.added === 'RESOLVED';
+                  });
+                  if (!change) {
+                    return;
+                  }
+                  
+                  var bug = bugs.find(function(bug) {
+                    return Ember.get(bug, 'id') == bugId;
+                  });
+                  storyPointsByBugId[bugId] = Ember.get(bug, 'storyPointsTotal');
                 });
-                storyPointsByBugId[bugId] = Ember.get(bug, 'storyPointsTotal');
               });
-              
-            });
+            }
             
             console.log('Story points by bug, completed by', day.format('MMM D'), JSON.stringify(storyPointsByBugId));
             var storyPoints = _.mapValues(storyPointsByBugId, function(n) {
