@@ -13,7 +13,7 @@ export default AuthenticatorBase.extend({
     var self = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       var params = {Bugzilla_login:opts.identification, Bugzilla_password:opts.password, names:[opts.identification]};
-      var url = 'https://bugzilla.zimbra.com/jsonrpc.cgi?method=User.get&params=[' + JSON.stringify(params) + ']';
+      var url = 'https://bugzilla.zimbra.com/jsonrpc.cgi?method=User.get&params=[' + encodeURIComponent(JSON.stringify(params)) + ']';
       console.log('GET', url);
       Ember.$.ajax({
         url: url,
