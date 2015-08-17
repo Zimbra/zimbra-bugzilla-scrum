@@ -18,13 +18,14 @@
 
 
 <div class="panel panel-default">
-  <div class="panel-heading">Completed</div>
+  <div class="panel-heading">Completed ({{donePoints}})</div>
   <div class="panel-body">
     <table class=".table .table-striped">
       <thead>
         <th>ID</th>
         <th>Summary</th>
         <th>Priority</th>
+        <th>SP</th>
         <th>Status</th>
         <th>Resolution</th>
         <th>Keywords</th>
@@ -35,6 +36,7 @@
             <td>{{#link-to "bug" bug}}{{bug.id}}{{/link-to}}</td>
             <td>{{bug.summary}}</td>
             <td>{{bug.priority}}</td>
+            <td>{{bug.storyPointsTotal}}</td>
             <td>{{bug.status}}</td>
             <td>{{bug.resolution}}</td>
             <td class="keywords">
@@ -51,13 +53,14 @@
 
 
 <div class="panel panel-default">
-  <div class="panel-heading">Not Completed</div>
+  <div class="panel-heading">Not Completed ({{toDoPoints}})</div>
   <div class="panel-body">
     <table class=".table .table-striped">
       <thead>
         <th>ID</th>
         <th>Summary</th>
         <th>Priority</th>
+        <th>SP</th>
         <th>Status</th>
         <th>Assigned To</th>
         <th>Keywords</th>
@@ -68,6 +71,7 @@
             <td>{{#link-to "bug" bug}}{{bug.id}}{{/link-to}}</td>
             <td>{{bug.summary}}</td>
             <td>{{bug.priority}}</td>
+            <td>{{bug.storyPointsTotal}}</td>
             <td>{{bug.status}}</td>
             <td>{{bug.assigned_to}}</td>
             <td class="keywords">

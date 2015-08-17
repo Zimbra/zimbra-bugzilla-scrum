@@ -35,6 +35,22 @@ export default Ember.Controller.extend({
     // Secondary sort by progression of status
     var sort = ['IN_PROGRESS', 'REOPENED', 'ASSIGNED', 'NEW'];
     return sort.indexOf(Ember.get(a, 'status')) - sort.indexOf(Ember.get(b, 'status'));
-  })
+  }),
+
+  donePoints: function() {
+    var points = 0;
+    _(this.get('doneBugs_')).forEachRight(function(bug) {
+      points += bug.get('storyPointsTotal');
+    });
+    return points;
+  }.property('model.bugs.length'),
+
+  toDoPoints: function() {
+    var points = 0;
+    _(this.get('toDoBugs_')).forEachRight(function(bug) {
+      points += bug.get('storyPointsTotal');
+    });
+    return points;
+  }.property('model.bugs.length')
 
 });
