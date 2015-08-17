@@ -8,7 +8,7 @@ export default AuthenticatorBase.extend({
       resolve(data);
     });
   },
-  
+
   authenticate: function(opts) {
     var self = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -29,17 +29,17 @@ export default AuthenticatorBase.extend({
           } else {
             var user = response.result.users[0];
             resolve(user);
-            
+
           }
         }
       });
     });
   },
-  
+
   invalidate: function(data) {
     return new Ember.RSVP.Promise(function(resolve, reject) {
       resolve();
     });
   }
-  
-}); 
+
+});
