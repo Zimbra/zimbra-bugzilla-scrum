@@ -8,19 +8,19 @@ export default Ember.Controller.extend({
       return bugs.filterBy('isDone', true);
     }
   }.property('model.bugs.length'),
-  
+
   doneBugs: Ember.computed.sort('doneBugs_', function(a, b) {
     var sort = ['CLOSED', 'VERIFIED', 'RESOLVED'];
-    return sort.indexOf(Ember.get(a, 'status')) - sort.indexOf(Ember.get(b, 'status')); 
+    return sort.indexOf(Ember.get(a, 'status')) - sort.indexOf(Ember.get(b, 'status'));
   }),
-  
+
   toDoBugs_: function() {
     var bugs = this.get('model.bugs');
     if (bugs) {
       return bugs.filterBy('isDone', false);
     }
   }.property('model.bugs.length'),
-  
+
   toDoBugs: Ember.computed.sort('toDoBugs_', function(a, b) {
     // Primary sort by priority
     var aPriority = Ember.get(a, 'priority');
@@ -31,10 +31,26 @@ export default Ember.Controller.extend({
         return x;
       }
     }
-    
+
     // Secondary sort by progression of status
     var sort = ['IN_PROGRESS', 'REOPENED', 'ASSIGNED', 'NEW'];
-    return sort.indexOf(Ember.get(a, 'status')) - sort.indexOf(Ember.get(b, 'status')); 
-  })
-  
+    return sort.indexOf(Ember.get(a, 'status')) - sort.indexOf(Ember.get(b, 'status'));
+  }),
+
+  donePoints: function() {
+    var points = 0;
+    _(this.get('doneBugs_')).forEachRight(function(bug) {
+      points += bug.get('storyPointsTotal');
+    });
+    return points;
+  }.property('model.bugs.length'),
+
+  toDoPoints: function() {
+    var points = 0;
+    _(this.get('toDoBugs_')).forEachRight(function(bug) {
+      points += bug.get('storyPointsTotal');
+    });
+    return points;
+  }.property('model.bugs.length')
+
 });
